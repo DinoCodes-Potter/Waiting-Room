@@ -1,6 +1,6 @@
 # Waiting Room
 
-**A macOS utility that watches any region of your screen and notifies you when it starts or stops changing.** (Not **Noterized** yet)
+**A macOS utility that watches any region of your screen and notifies you when it starts or stops changing.** (Not **notarized** yet)
 
 Waiting Room helps you keep an eye on long-running tasks without constantly checking your screen. Monitor build processes, progress bars, terminal output, and more — with automatic change detection and on-device text recognition.
 
