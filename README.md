@@ -1,18 +1,22 @@
 <div align="center">
 
-# Waiting Room
+<h1>Waiting Room</h1>
 
-**Go make a coffee. Waiting Room will watch the screen.**
+<p><strong>Go make a coffee. Waiting Room will watch the screen.</strong></p>
 
-A macOS menu bar app that watches any region of your screen and notifies you when it starts or stops changing.
+<p>A macOS menu bar app that watches any region of your screen and notifies you when it starts or stops changing.</p>
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-2559e6.svg)](LICENSE)
-![Platform](https://img.shields.io/badge/platform-macOS%2014%2B%20%C2%B7%20Apple%20silicon-17202b.svg)
-[![CI](https://github.com/DinoCodes-Potter/Waiting-Room/actions/workflows/ci.yml/badge.svg)](https://github.com/DinoCodes-Potter/Waiting-Room/actions/workflows/ci.yml)
+<p>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-2559e6.svg"></a>
+  <img alt="Platform: macOS 14+, Apple silicon" src="https://img.shields.io/badge/platform-macOS%2014%2B%20%C2%B7%20Apple%20silicon-17202b.svg">
+  <a href="https://github.com/DinoCodes-Potter/Waiting-Room/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/DinoCodes-Potter/Waiting-Room/actions/workflows/ci.yml/badge.svg"></a>
+</p>
 
-[**Download for macOS**](https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg) ·
-[Website](https://dinocodes-potter.github.io/Waiting-Room/) ·
-[Report a bug](https://github.com/DinoCodes-Potter/Waiting-Room/issues/new?template=bug_report.yml)
+<p>
+  <a href="https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg"><strong>Download for macOS</strong></a> &middot;
+  <a href="https://dinocodes-potter.github.io/Waiting-Room/">Website</a> &middot;
+  <a href="https://github.com/DinoCodes-Potter/Waiting-Room/issues/new?template=bug_report.yml">Report a bug</a>
+</p>
 
 </div>
 
