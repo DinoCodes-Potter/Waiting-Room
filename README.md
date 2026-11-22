@@ -1,63 +1,126 @@
+<div align="center">
+
 # Waiting Room
 
-**A macOS utility that watches any region of your screen and notifies you when it starts or stops changing.** (Not **notarized** yet)
+**Go make a coffee. Waiting Room will watch the screen.**
 
-Waiting Room helps you keep an eye on long-running tasks without constantly checking your screen. Monitor build processes, progress bars, terminal output, and more — with automatic change detection and on-device text recognition.
+A macOS menu bar app that watches any region of your screen and notifies you when it starts or stops changing.
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-2559e6.svg)](LICENSE)
+![Platform](https://img.shields.io/badge/platform-macOS%2014%2B%20%C2%B7%20Apple%20silicon-17202b.svg)
+[![CI](https://github.com/DinoCodes-Potter/Waiting-Room/actions/workflows/ci.yml/badge.svg)](https://github.com/DinoCodes-Potter/Waiting-Room/actions/workflows/ci.yml)
+
+[**Download for macOS**](https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg) ·
+[Website](https://dinocodes-potter.github.io/Waiting-Room/) ·
+[Report a bug](https://github.com/DinoCodes-Potter/Waiting-Room/issues/new?template=bug_report.yml)
+
+</div>
+
+---
+
+Drag a box around anything slow, such as a build log, a progress bar, a file transfer or an AI agent's output. Waiting Room watches that region and sends you a notification when it stops changing, so you don't have to keep checking.
 
 ## Features
 
-- **Watch any screen region** — Select a rectangular area on any connected display.
-- **Multiple simultaneous watches** — Monitor several regions independently.
-- **Pixel-level change detection** — Captures each watched region every second and detects changes, including slowly advancing progress bars.
-- **Reduced false positives** — Compares the current frame with the frame from two seconds earlier, helping ignore periodically blinking elements such as terminal cursors.
-- **Two monitoring modes** — Get notified when a region starts changing or stops changing.
-- **Configurable sensitivity** — Set the required duration of stillness and adjust sensitivity for completion detection.
-- **On-device text recognition** — Uses Apple's Vision framework to recognize text when a watch triggers.
-- **Native notifications** — Receive macOS notifications with a sound, a concise status summary, and the last few lines of recognized text.
-- **Activity chime** — Plays a chime when a change is detected.
-- **Privacy-first design** — Screenshots are analyzed locally and discarded. No network calls are made.
+- **Watch any region.** Select a rectangle on any connected display.
+- **Watch several things at once.** Every watch runs independently, with its own name, mode and sensitivity.
+- **Three alert modes.**
+  - *Stops*: alert when the region has been still for a set time (2 to 60 seconds).
+  - *Starts*: alert the moment something changes.
+  - *Any change*: alert on every change, with a short cooldown.
+- **Pixel-level detection.** Each region is captured every second (every two seconds while a *Stops* watch is waiting for activity to begin), which is enough to catch slowly advancing progress bars.
+- **Fewer false alarms.** A pixel only counts as changed if it differs from both of the previous two frames, so blinking terminal cursors are ignored.
+- **Adjustable sensitivity.** Choose High, Medium or Low.
+- **Reads the screen when it fires.** On-device text recognition (Apple Vision) reads the region and flags whether it looks like a success or an error.
+- **Native alerts.** A banner on the watched display, a macOS notification, and a chime.
+- **Light on resources.** Capture pauses while the screen sleeps or the session is locked, and slows down in Low Power Mode. Waiting Room never captures its own windows.
 
-## How It Works
+## Install
 
-1. **Select a region:** Click `Watch a region…`. Your screens dim, allowing you to drag a rectangle around the area you want to monitor.
-2. **Configure a watch:** Choose whether to be notified when the selected region starts changing or stops changing. For inactivity monitoring, configure the required duration of stillness and sensitivity.
-3. **Monitor automatically:** Waiting Room captures the selected region once per second and compares its pixels against previous frames.
-4. **Get notified:** When the configured condition is met, Waiting Room uses Apple's Vision framework to recognize visible text and sends a macOS notification with a sound and a concise summary.
+1. [Download the latest DMG](https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg).
+2. Open it and drag **Waiting Room** into **Applications**.
+3. Open Waiting Room. It lives in your menu bar (look for the hourglass).
 
-### Example Notifications
+### macOS will warn you the first time
 
-- `SUCCESS` — Looks successful
-- `WARNING` — Looks like an error
+Waiting Room is **not notarized yet**, so macOS blocks the first launch. To open it anyway:
 
-Notifications also include the last couple of lines of recognized text, providing additional context without requiring you to reopen the monitored application.
+1. Try to open the app once, then dismiss the warning.
+2. Go to **System Settings → Privacy & Security**, scroll to the **Security** section and click **Open Anyway**.
+3. Confirm with your password or Touch ID.
+
+You only need to do this once.
+
+### Grant Screen Recording access
+
+To compare pixels, Waiting Room needs the **Screen Recording** permission. Click **Grant Screen Recording access…** in the menu, allow it in System Settings, then quit and reopen the app.
+
+### Verify your download
+
+```sh
+shasum -a 256 WaitingRoom-0.1.dmg
+# b64578218910663ed07dd76904f5e0e1253a18900cefda2f6f50419d6e61cc6a
+```
+
+### Requirements
+
+- A Mac with Apple silicon
+- macOS 14 (Sonoma) or later, which is what the ScreenCaptureKit screenshot API used by the app needs
+
+## How it works
+
+1. **Select a region.** Choose **Watch a region…** from the menu bar. Your screens dim and you drag a rectangle around what you want to watch.
+2. **Choose an alert.** Pick *Stops*, *Starts* or *Any change*. For *Stops*, set how long the region must stay still, and the sensitivity.
+3. **Let it watch.** Waiting Room captures a small copy of the region and compares it with the previous two frames.
+4. **Get notified.** When the condition is met, Waiting Room reads the visible text and tells you what happened, for example:
+
+   > **Watch 1: done**
+   > Stopped changing. ✅ Looks successful. 212 tests passed
+
+   It flags `✅ Looks successful` or `⚠️ Looks like an error` by looking for words such as *passed*, *complete*, *failed* or *traceback*, and always includes the last couple of lines it read.
 
 ## Privacy
 
-Waiting Room is designed to keep your screen data on your Mac.
+Your screen content stays on your Mac.
 
-- Screenshot analysis happens locally.
-- Text recognition uses Apple's Vision framework on-device.
-- Captured screenshots are analyzed and discarded.
-- No network calls are made.
+- Screenshots are analyzed locally and discarded.
+- Text recognition runs on-device with Apple's Vision framework.
+- The app makes no network calls.
 
-**Your screen content stays on your Mac.**
+The whole app is a handful of Swift files in [`Sources/WaitingRoom`](Sources/WaitingRoom), so you can check these claims yourself.
 
-## Built With
+## Build from source
 
-- **Swift** — Application development
-- **Apple Vision** — On-device text recognition
-- **macOS Notification Center** — Native system alerts
+You need macOS 14 or later and Xcode 15 or later (or the matching Swift toolchain).
 
-## Requirements
+```sh
+git clone https://github.com/DinoCodes-Potter/Waiting-Room.git
+cd Waiting-Room
+swift build -c release
+.build/release/WaitingRoom
+```
 
-- An apple silicon Mac
-- The macOS version and other system requirements specified by the project
+> **Note**
+> When run directly from the command line the app has no bundle identifier, so macOS notifications are skipped. The on-screen banner and chime still work. Run it from an app bundle to get full notifications.
+
+## Project layout
+
+```
+Sources/WaitingRoom/
+├── WaitingRoomApp.swift   App entry point and menu bar item
+├── Views.swift            Menu bar popover and watch cards
+├── Watch.swift            A single watch: frame comparison and trigger logic
+├── WatchManager.swift     Scheduling, screen capture and notifications
+├── RegionSelector.swift   Full-screen region selection overlay
+├── Analysis.swift         On-device text recognition and the success/error summary
+└── Toast.swift            The on-screen banner
+website/                   The project website (deployed with GitHub Pages)
+```
+
+## Contributing
+
+Bug reports and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started, and [SECURITY.md](SECURITY.md) for how to report a security issue.
 
 ## Licence
 
-Waiting Room is licensed under the [MIT License](LICENSE).
-
-Copyright (c) 2026 Waiting Room contributors.
-
-See the [`LICENSE`](LICENSE) file for the full licence text.
-
+[MIT](LICENSE) © 2026 Abhinav Sharma

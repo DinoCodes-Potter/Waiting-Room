@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waiting Room: go make a coffee, we'll watch the screen</title>
+  <meta name="description" content="Waiting Room is a free Mac menu bar app. Drag a box around a build, a download or an AI agent's output and get a notification when it stops changing.">
+  <meta name="theme-color" content="#eef1f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e131a" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Waiting Room">
+  <meta property="og:description" content="A Mac menu bar app that tells you when something on your screen stops changing.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="brand" href="#top" aria-label="Waiting Room, home">
+        <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12M6 21h12M7 3c0 5 3 6 5 9-2 3-5 4-5 9M17 3c0 5-3 6-5 9 2 3 5 4 5 9"/></svg>
+        <span>waiting room</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#how">How it works</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#install">Install</a>
+        <a href="https://github.com/DinoCodes-Potter/Waiting-Room">GitHub</a>
+      </nav>
+      <a class="btn btn--small" href="download/WaitingRoom.dmg" download data-download>Download</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <h1>
+            <span>go make a coffee.</span>
+            <span class="hero__second">we'll watch the screen.</span>
+          </h1>
+          <p class="hero__lead">
+            Waiting Room is a Mac menu bar app. Drag a box around a build log, a progress bar or an AI agent's output, and it notifies you the moment it stops changing.
+          </p>
+
+          <div class="cta">
+            <a class="btn btn--large" href="download/WaitingRoom.dmg" download data-download>Download for macOS</a>
+            <a class="textlink" href="https://github.com/DinoCodes-Potter/Waiting-Room">View the source</a>
+          </div>
+
+          <ul class="facts" aria-label="Download details">
+            <li>Version <span data-version>0.1</span></li>
+            <li><span data-size>1.1 MB</span></li>
+            <li>macOS 14 or later</li>
+            <li>Apple silicon</li>
+            <li>Free and open source</li>
+          </ul>
+
+          <p class="note" data-platform-note hidden></p>
+
+          <div class="after" data-after hidden role="status">
+            <p class="after__title">Your download is starting.</p>
+            <p>When it finishes, open the DMG and drag Waiting Room into Applications. macOS will warn you the first time because the app isn't notarized yet. <a href="#gatekeeper">Here's how to open it.</a></p>
+            <p class="after__fallback">Nothing happened? <a href="https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg">Download from GitHub</a>.</p>
+          </div>
+        </div>
+
+        <figure class="demo" data-demo data-state="idle" aria-label="Animated demo of Waiting Room watching a test run">
+          <div class="screen">
+            <div class="screen__bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <b>Terminal</b>
+            </div>
+            <div class="screen__body" aria-hidden="true">
+              <p class="log">$ make test</p>
+              <p class="log log--dim">Compiling 214 files</p>
+              <p class="log log--dim">Linking WaitingRoomTests</p>
+              <div class="zone">
+                <div class="region" data-region>
+                  <span class="region__chip"><i class="dot"></i>Watch 1</span>
+                </div>
+                <p class="log">tests <span data-count>0</span>/212</p>
+                <div class="bar"><div class="bar__fill" data-bar></div></div>
+                <p class="log log--result" data-result>212 tests passed</p>
+              </div>
+            </div>
+            <div class="toast" data-toast aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="toast__icon"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-7"/></svg>
+              <div>
+                <strong>Watch 1: done</strong>
+                <span>Stopped changing. ✅ Looks successful. 212 tests passed</span>
+              </div>
+            </div>
+          </div>
+          <figcaption class="demo__caption">
+            <span class="demo__status"><i class="dot"></i><span data-status aria-live="polite">Select a region</span></span>
+            <button class="textbtn" type="button" data-replay>Replay</button>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="wrap split">
+        <div class="split__head">
+          <h2>four steps, then you can leave</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <h3>Select a region</h3>
+            <p>Choose <em>Watch a region…</em> from the menu bar. Your screens dim and you drag a rectangle around whatever is slow.</p>
+          </li>
+          <li>
+            <h3>Choose when to alert you</h3>
+            <p>Pick whether you want to hear when it stops, starts or changes at all, and how still it has to be.</p>
+          </li>
+          <li>
+            <h3>Go do something else</h3>
+            <p>Waiting Room checks the region every second or two, so keep it visible on screen and get on with something else.</p>
+          </li>
+          <li>
+            <h3>Get the verdict</h3>
+            <p>It reads the text in the region and tells you whether it looks like a success or an error, with the last lines it saw.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--tint" id="modes">
+      <div class="wrap split">
+        <div class="split__head">
+          <h2>three ways to be told</h2>
+          <p class="muted">Every watch has its own mode, so one region can tell you when it finishes while another tells you when it wakes up.</p>
+        </div>
+        <div class="modes" data-tabs>
+          <div class="modes__tabs" role="tablist" aria-label="Alert mode">
+            <button role="tab" id="tab-stops" aria-controls="panel-stops" aria-selected="true">Stops</button>
+            <button role="tab" id="tab-starts" aria-controls="panel-starts" aria-selected="false" tabindex="-1">Starts</button>
+            <button role="tab" id="tab-every" aria-controls="panel-every" aria-selected="false" tabindex="-1">Any change</button>
+          </div>
+          <div class="modes__panel" role="tabpanel" id="panel-stops" aria-labelledby="tab-stops">
+            <p class="modes__lead">Tell me when it's done.</p>
+            <p>For builds, installs, exports and long-running agents. Waiting Room waits for activity to begin, then alerts you once the region has stayed still for the time you set, from 2 to 60 seconds.</p>
+          </div>
+          <div class="modes__panel" role="tabpanel" id="panel-starts" aria-labelledby="tab-starts" hidden>
+            <p class="modes__lead">Tell me when it wakes up.</p>
+            <p>For a queue that's empty, a page that's about to update or a process that hasn't started. You get one alert the instant something in the region changes.</p>
+          </div>
+          <div class="modes__panel" role="tabpanel" id="panel-every" aria-labelledby="tab-every" hidden>
+            <p class="modes__lead">Tell me every time.</p>
+            <p>For a chat window, a log tail or a dashboard. Every change triggers an alert, with a three-second cooldown so you aren't buried.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="details">
+      <div class="wrap split">
+        <div class="split__head">
+          <h2>small things that make it calm</h2>
+        </div>
+        <dl class="details">
+          <div>
+            <dt>Ignores blinking cursors</dt>
+            <dd>A pixel only counts if it differs from both of the previous two frames, so terminal cursors and other blinkers don't set it off.</dd>
+          </div>
+          <div>
+            <dt>Watches several things at once</dt>
+            <dd>Add as many regions as you like, across every connected display. Each has its own name, mode and sensitivity.</dd>
+          </div>
+          <div>
+            <dt>Catches slow progress</dt>
+            <dd>A progress bar that only inches forward still counts as activity. Choose High, Medium or Low sensitivity to suit the region.</dd>
+          </div>
+          <div>
+            <dt>Reads the screen for you</dt>
+            <dd>When a watch fires, on-device text recognition reads the region and the alert includes the last couple of lines.</dd>
+          </div>
+          <div>
+            <dt>Doesn't waste battery</dt>
+            <dd>It pauses while your screen sleeps or your session is locked, and checks less often in Low Power Mode.</dd>
+          </div>
+          <div>
+            <dt>Never watches itself</dt>
+            <dd>Waiting Room leaves its own windows out of every capture, so its banners can't trigger a watch.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section section--privacy" id="privacy">
+      <div class="wrap">
+        <h2 class="privacy__title">your screen stays on your mac.</h2>
+        <div class="privacy__grid">
+          <p>Waiting Room makes no network calls. Each screenshot is analyzed on your Mac and then discarded, and text recognition runs on-device with Apple's Vision framework.</p>
+          <p>You don't have to take our word for it. The whole app is seven Swift files, small enough to read over lunch. <a href="https://github.com/DinoCodes-Potter/Waiting-Room/tree/main/Sources/WaitingRoom">Read the source.</a> This website has no analytics, no cookies and no third-party scripts either.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="install">
+      <div class="wrap split">
+        <div class="split__head">
+          <h2>install in a minute</h2>
+          <a class="btn btn--large" href="download/WaitingRoom.dmg" download data-download>Download for macOS</a>
+          <p class="muted small">Version <span data-version>0.1</span>, <span data-size>1.1 MB</span>. Needs an Apple silicon Mac on macOS 14 or later.</p>
+        </div>
+        <div class="install">
+          <ol class="install__steps">
+            <li>Open the downloaded <strong>WaitingRoom.dmg</strong> and drag <strong>Waiting Room</strong> into <strong>Applications</strong>.</li>
+            <li>Open it. The hourglass appears in your menu bar.</li>
+            <li>Choose <strong>Grant Screen Recording access…</strong>, allow it in System Settings, then quit and reopen Waiting Room.</li>
+          </ol>
+
+          <div class="callout" id="gatekeeper">
+            <h3>If macOS says it can't open the app</h3>
+            <p>Waiting Room isn't notarized yet, so macOS blocks the first launch. Open the app once, dismiss the warning, then go to <strong>System Settings → Privacy &amp; Security</strong>, scroll to <strong>Security</strong> and click <strong>Open Anyway</strong>. You only do this once.</p>
+          </div>
+
+          <details class="verify">
+            <summary>Verify the download</summary>
+            <p>The SHA-256 checksum of this version:</p>
+            <code data-sha>b64578218910663ed07dd76904f5e0e1253a18900cefda2f6f50419d6e61cc6a</code>
+            <p>Check yours with <code>shasum -a 256 WaitingRoom.dmg</code>.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tint" id="faq">
+      <div class="wrap split">
+        <div class="split__head">
+          <h2>questions</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Why does it need Screen Recording access?</summary>
+            <p>macOS requires that permission for any app that captures part of the screen. Waiting Room uses it only to compare the pixels in the regions you choose, and nothing is saved or sent anywhere.</p>
+          </details>
+          <details>
+            <summary>Why isn't it notarized?</summary>
+            <p>Not yet. Until it is, macOS shows a warning on first launch. You can verify the checksum above, read the source, or build it yourself with <code>swift build</code>.</p>
+          </details>
+          <details>
+            <summary>Does it work on Intel Macs?</summary>
+            <p>The download is built for Apple silicon only.</p>
+          </details>
+          <details>
+            <summary>Is it free?</summary>
+            <p>Yes. Waiting Room is open source under the MIT licence.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <div>
+        <p class="site-footer__title">waiting room</p>
+        <p class="muted small">Open source under the <a href="https://github.com/DinoCodes-Potter/Waiting-Room/blob/main/LICENSE">MIT licence</a>.</p>
+      </div>
+      <nav class="site-footer__links" aria-label="Footer">
+        <a href="https://github.com/DinoCodes-Potter/Waiting-Room">GitHub</a>
+        <a href="https://github.com/DinoCodes-Potter/Waiting-Room/issues/new/choose">Report a bug</a>
+        <a href="https://github.com/DinoCodes-Potter/Waiting-Room/blob/main/CHANGELOG.md">Changelog</a>
+        <a href="https://github.com/DinoCodes-Potter/Waiting-Room/blob/main/SECURITY.md">Security</a>
+      </nav>
+      <a class="btn" href="download/WaitingRoom.dmg" download data-download>Download for macOS</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
