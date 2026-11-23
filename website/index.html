@@ -207,7 +207,7 @@ h2{font-weight:800;font-size:clamp(36px,5.4vw,76px);line-height:.98;letter-spaci
 .tk .ticket__main{flex:1}
 .tk p{font-size:15px;color:#5b5648;margin-top:2px}
 .take__go{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:52px}
-.pre{position:relative;margin-top:44px;padding:20px 24px;border-radius:14px;background:color-mix(in srgb,var(--ink) 92%,transparent);color:var(--wall);font:13.5px/1.8 var(--mono);overflow-x:auto}
+.pre{position:relative;margin-top:44px;padding:52px 24px 20px;white-space:pre-wrap;word-break:break-all;border-radius:14px;background:color-mix(in srgb,var(--ink) 92%,transparent);color:var(--wall);font:13.5px/1.8 var(--mono);overflow-x:auto}
 .pre button{position:absolute;right:12px;top:12px;padding:5px 12px;border-radius:8px;border:1.5px solid color-mix(in srgb,var(--wall) 45%,transparent);background:none;font:12px var(--mono);cursor:pointer}
 .pre button:hover{background:var(--wall);color:var(--ink)}
 .verify{margin-top:20px;font-size:14px;color:var(--mut)}
@@ -432,6 +432,52 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
   .m3 .eq i{height:65%}
   .js .pn{opacity:1;transform:rotate(var(--r,0deg))}
 }
+
+/* ---------- PA ticker ---------- */
+.pa{position:relative;z-index:1;overflow:hidden;background:var(--panel);color:var(--amber);border-block:3px solid var(--ink);font:600 14px/1 var(--mono);letter-spacing:.06em}
+.pa__t{display:flex;width:max-content;animation:pa 48s linear infinite}
+.pa:hover .pa__t{animation-play-state:paused}
+.pa__t span{padding:14px 28px;white-space:nowrap}
+.pa__t span::before{content:"\25CF";margin-right:14px;color:var(--led);font-size:10px;vertical-align:2px}
+@keyframes pa{to{transform:translateX(-50%)}}
+/* ---------- facts band ---------- */
+.facts{padding:56px 0 0}
+.facts__g{display:grid;grid-template-columns:repeat(4,1fr);border:3px solid var(--ink);border-radius:18px;background:color-mix(in srgb,var(--paper) 55%,transparent);overflow:hidden}
+:root[data-lights="off"] .facts__g{background:color-mix(in srgb,var(--paper) 6%,transparent)}
+.facts__g div{padding:22px 24px;border-left:2px dashed var(--line)}
+.facts__g div:first-child{border-left:0}
+.facts__g b{display:block;font:700 34px/1 var(--mono);letter-spacing:-.04em}
+.facts__g span{display:block;margin-top:8px;font-size:14px;color:var(--mut)}
+/* ---------- control panel ---------- */
+.ctl{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:center}
+.pwin{background:var(--paper);color:var(--paper-ink);border:3px solid var(--paper-ink);border-radius:16px;box-shadow:0 26px 40px -22px rgba(18,32,26,.55);overflow:hidden}
+.win__bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:2px solid var(--paper-ink);background:#efe7cd}
+.win__bar i{width:12px;height:12px;border-radius:50%;background:#d92d20}
+.win__bar i:nth-child(2){background:#f5c400}.win__bar i:nth-child(3){background:#1f8a4c}
+.win__bar span{margin-left:10px;font:600 13px var(--mono)}
+.win__b{padding:22px 24px 26px;display:grid;gap:20px}
+.fld label,.fld>span{display:flex;justify-content:space-between;font:600 13px var(--mono);margin-bottom:8px}
+.fld output{font-weight:700}
+.pseg{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--paper-ink);border-radius:10px;overflow:hidden}
+.pseg button{padding:9px 6px;border:0;border-left:2px solid var(--paper-ink);background:none;font:600 14px var(--sans);cursor:pointer;color:var(--paper-ink);transition:background .2s,color .2s}
+.pseg button:first-child{border-left:0}
+.pseg button[aria-pressed="true"]{background:var(--paper-ink);color:var(--paper)}
+.pwin input[type=range]{width:100%;accent-color:var(--paper-ink)}
+.pwin input[type=text]{width:100%;padding:9px 12px;border:2px solid var(--paper-ink);border-radius:10px;background:#fffaf0;font:600 14px var(--mono);color:var(--paper-ink)}
+.says{padding:14px 16px;border-radius:12px;background:var(--panel);color:var(--amber);font:500 14px/1.6 var(--mono);min-height:5.4em}
+.says b{color:#fff}
+/* ---------- compare ---------- */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.cmp>div{padding:28px 28px 30px;border-radius:18px;border:3px solid var(--ink)}
+.cmp__bad{background:transparent;border-style:dashed!important}
+.cmp__good{background:var(--paper);color:var(--paper-ink);border-color:var(--paper-ink)!important;box-shadow:0 22px 30px -22px rgba(18,32,26,.5)}
+.cmp h3{font-size:22px;letter-spacing:-.02em;margin-bottom:16px}
+.cmp ul{list-style:none;padding:0;display:grid;gap:12px}
+.cmp li{display:grid;grid-template-columns:62px 1fr;gap:12px;font-size:16px}
+.cmp li b{font:600 13px/1.9 var(--mono);opacity:.6}
+.cmp__bad li span{text-decoration:line-through;text-decoration-thickness:1.5px;opacity:.75}
+@media(max-width:860px){.facts__g{grid-template-columns:1fr 1fr}.facts__g div:nth-child(3){border-left:0}.facts__g div:nth-child(n+3){border-top:2px dashed var(--line)}.ctl,.cmp{grid-template-columns:1fr;gap:32px}}
+@media(prefers-reduced-motion:reduce){.pa__t{animation:none}}
 </style>
 </head>
 <body>
@@ -492,6 +538,16 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
     </div>
   </section>
 
+
+  <!-- ============ PA TICKER + FACTS ============ -->
+  <div class="pa" aria-hidden="true"><div class="pa__t"><span>NOW SERVING: YOUR BUILD</span><span>PLEASE KEEP THE REGION VISIBLE</span><span>NO. 040 TO WINDOW 3</span><span>SCREENSHOTS NEVER LEAVE THIS MAC</span><span>THE EXPORT HAS STOPPED CHANGING</span><span>PLEASE WAIT TO BE CALLED</span><span>GO MAKE A COFFEE</span><span>UPLOAD COMPLETE, WINDOW 1</span><span>THE AGENT IS DONE TYPING</span><span>NOW SERVING: YOUR BUILD</span><span>PLEASE KEEP THE REGION VISIBLE</span><span>NO. 040 TO WINDOW 3</span><span>SCREENSHOTS NEVER LEAVE THIS MAC</span><span>THE EXPORT HAS STOPPED CHANGING</span><span>PLEASE WAIT TO BE CALLED</span><span>GO MAKE A COFFEE</span><span>UPLOAD COMPLETE, WINDOW 1</span><span>THE AGENT IS DONE TYPING</span></div></div>
+  <section class="facts" aria-label="At a glance"><div class="wrap"><div class="facts__g">
+    <div><b>1.1 MB</b><span>The whole app, in a DMG</span></div>
+    <div><b>1 sec</b><span>How often a region is checked</span></div>
+    <div><b>0</b><span>Network calls. None, ever</span></div>
+    <div><b>MIT</b><span>Read it, fork it, build it</span></div>
+  </div></div></section>
+
   <!-- ============ HOW IT WORKS ============ -->
   <section class="sec" id="how">
     <div class="wrap split">
@@ -539,6 +595,28 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
           <div class="mini m3" aria-hidden="true"><div class="stage"><div class="eq"><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="lab">every change</span><span class="bell"><svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4l2-2zM10 21a2 2 0 0 0 4 0"/></svg></span></div></div>
           <div class="win__body"><h3>Any change</h3><p>For pages and logs you want to follow. You hear about every change, with a short cooldown so it doesn't nag.</p></div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTROL PANEL ============ -->
+  <section class="sec" id="panel">
+    <div class="wrap ctl">
+      <div>
+        <h2>set it once,<br>say it plainly.</h2>
+        <p class="sub">Every watch has a name, a mode and a sensitivity. Move the controls and read back exactly what Waiting Room will do.</p>
+      </div>
+      <div class="pwin" role="group" aria-label="Watch settings, interactive example">
+        <div class="win__bar"><i></i><i></i><i></i><span>Watch 1</span></div>
+        <div class="win__b">
+          <div class="fld"><label for="pname">Name</label><input id="pname" type="text" value="Release build" maxlength="24" autocomplete="off"></div>
+          <div class="fld"><span>Alert me when it</span>
+            <div class="pseg" id="pmode"><button type="button" aria-pressed="true" data-v="stops">Stops</button><button type="button" aria-pressed="false" data-v="starts">Starts</button><button type="button" aria-pressed="false" data-v="any">Changes</button></div></div>
+          <div class="fld"><label for="pstill">Still for <output id="pstillo">10 s</output></label><input id="pstill" type="range" min="2" max="60" value="10"></div>
+          <div class="fld"><span>Sensitivity</span>
+            <div class="pseg" id="psens"><button type="button" aria-pressed="false" data-v="Low">Low</button><button type="button" aria-pressed="true" data-v="Medium">Medium</button><button type="button" aria-pressed="false" data-v="High">High</button></div></div>
+          <p class="says" id="says" aria-live="polite"></p>
+        </div>
       </div>
     </div>
   </section>
@@ -636,6 +714,25 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
     </div>
   </section>
 
+
+  <!-- ============ COMPARE ============ -->
+  <section class="sec" id="compare">
+    <div class="wrap">
+      <h2>two ways to wait<br>for a build.</h2>
+      <div class="cmp">
+        <div class="cmp__bad"><h3>Staring at it</h3><ul>
+          <li><b>0:00</b><span>Start the build. Open email "just for a second".</span></li>
+          <li><b>0:04</b><span>Check the build. Still going.</span></li>
+          <li><b>0:09</b><span>Check the build. Still going.</span></li>
+          <li><b>0:14</b><span>Fall into a video. The build finished at 0:11.</span></li></ul></div>
+        <div class="cmp__good"><h3>Waiting Room</h3><ul>
+          <li><b>0:00</b><span>Start the build. Draw a box around the log.</span></li>
+          <li><b>0:01</b><span>Go and do something else. Properly this time.</span></li>
+          <li><b>0:11</b><span>A banner appears: "Stopped changing. Looks successful."</span></li>
+          <li><b>0:12</b><span>You are back at your desk before the second sip.</span></li></ul></div>
+      </div>
+    </div>
+  </section>
 
   <!-- ============ THE BILL ============ -->
   <section class="sec" id="bill">
@@ -977,6 +1074,17 @@ if(!reduce)setTimeout(function(){if(!touched&&A.st===0&&scrollY<30&&!A.auto)runA
 setSt(0);
 root.classList.add('ready');
 setTimeout(function(){if(!root.classList.contains('ready'))root.classList.add('reveal-all')},3500);
+
+(function(){var m='stops',sn='Medium',nm=$('#pname'),st=$('#pstill'),so_=$('#pstillo'),sy=$('#says');
+function esc(t){return t.replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function r(){var n=esc(nm.value.trim()||'Watch 1'),t=st.value,sens={Low:'Only big changes count.',Medium:'Blinking cursors are ignored.',High:'Even small changes count.'}[sn],q;
+ so_.textContent=t+' s';$('#pstill').parentNode.style.opacity=m==='stops'?1:.35;st.disabled=m!=='stops';
+ if(m==='stops')q='Waiting Room watches <b>'+n+'</b> and tells you once it has been still for <b>'+t+' seconds</b>.';
+ else if(m==='starts')q='Waiting Room watches <b>'+n+'</b> and tells you the moment it starts to change.';
+ else q='Waiting Room tells you every time <b>'+n+'</b> changes, with a short cooldown so it never nags.';
+ sy.innerHTML=q+'<br>Sensitivity '+sn.toLowerCase()+'. '+sens}
+function seg(id,fn){$$(id+' button').forEach(function(b){b.onclick=function(){$$(id+' button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});fn(b.dataset.v);r()}})}
+seg('#pmode',function(v){m=v});seg('#psens',function(v){sn=v});nm.oninput=r;st.oninput=r;r()})();
 })();
 </script>
 </body>
