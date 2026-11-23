@@ -35,4 +35,4 @@ Waiting Room's promise is that your screen content never leaves your Mac. Pull r
 
 ## Website changes
 
-The project website lives in `website/` and is plain HTML, CSS and JavaScript with no build step. Open `website/index.html` in a browser to preview it. Please don't add third-party scripts, analytics or trackers. (The page loads two typefaces from Google Fonts; self-hosting them would be a welcome change.)
+The project website lives in `website/` and is plain HTML, CSS and JavaScript with no build step. Open `website/index.html` in a browser to preview it. Please keep it free of third-party scripts, fonts and trackers: the page uses system fonts and makes no network requests.
