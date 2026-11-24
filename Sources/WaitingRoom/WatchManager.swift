@@ -163,41 +163,49 @@ final class WatchManager: ObservableObject {
             return Watch.Target(windowID: CGWindowID(number),
                                 app: info[kCGWindowOwnerName as String] as? String ?? "App",
                                 title: info[kCGWindowName as String] as? String ?? "",
-                                localRect: local)
+                                localRect: local,
+                                windowSize: bounds.size)
         }
         return nil
     }
 
-    /// Current on-screen frame of a window (CoreGraphics coordinates), nil if it isn't visible.
-    private func liveBounds(of id: CGWindowID) -> CGRect? {
+    /// Where a window is (CoreGraphics coordinates) and whether it is currently drawn on screen.
+    /// A window on another Desktop or minimized has bounds but is not on screen.
+    private func liveInfo(of id: CGWindowID) -> (bounds: CGRect, onScreen: Bool)? {
         guard let list = CGWindowListCopyWindowInfo([.optionIncludingWindow], id) as? [[String: Any]],
               let info = list.first,
               let dict = info[kCGWindowBounds as String] as? NSDictionary,
               let bounds = CGRect(dictionaryRepresentation: dict as CFDictionary)
         else { return nil }
-        let onScreen = info[kCGWindowIsOnscreen as String] as? Bool ?? false
-        return onScreen ? bounds : nil
+        return (bounds, info[kCGWindowIsOnscreen as String] as? Bool ?? false)
     }
 
     private func refreshLiveRects() {
         for w in watches {
-            let rect: CGRect?
+            var rect: CGRect? = w.screenRect
+            var nowHidden = false
             if w.usesWindow, let t = w.target {
-                if let b = liveBounds(of: t.windowID) {
-                    rect = CGRect(x: b.minX + t.localRect.minX,
-                                  y: primaryHeight - (b.minY + t.localRect.maxY),
-                                  width: t.localRect.width, height: t.localRect.height)
+                if let info = liveInfo(of: t.windowID) {
+                    if info.bounds.size != w.windowSize { w.windowSize = info.bounds.size }
+                    if info.onScreen {
+                        rect = CGRect(x: info.bounds.minX + t.localRect.minX,
+                                      y: primaryHeight - (info.bounds.minY + t.localRect.maxY),
+                                      width: t.localRect.width, height: t.localRect.height)
+                    } else {
+                        rect = nil
+                        nowHidden = true
+                    }
                 } else {
                     rect = nil
+                    nowHidden = true
                 }
-            } else {
-                rect = w.screenRect
             }
             if w.liveRect != rect { w.liveRect = rect }
-            let nowHidden = w.usesWindow && rect == nil
             if w.hidden != nowHidden {
+                // The capture path changes (screen capture <-> window server), so start the
+                // comparison fresh instead of treating the switch as a change.
                 w.hidden = nowHidden
-                if !nowHidden { w.rebaseline() } else { w.error = nil; w.changing = false }
+                w.rebaseline()
             }
         }
         frames.sync(watches, enabled: showFrames)
@@ -214,7 +222,7 @@ final class WatchManager: ObservableObject {
 
         guard !paused, !userPaused, !busy else { return }
         let now = Date()
-        let due = watches.filter { $0.state != .finished && !$0.hidden && now >= $0.nextDue }
+        let due = watches.filter { $0.state != .finished && now >= $0.nextDue }
         guard !due.isEmpty else { return }
         busy = true
 
@@ -234,13 +242,12 @@ final class WatchManager: ObservableObject {
             }
 
             for w in due where w.state != .finished {
-                guard let plan = self.plan(for: w, content: content, maxSide: w.mode == .text ? 1400 : 480) else {
-                    w.nextDue = Date().addingTimeInterval(2)
-                    continue
-                }
                 do {
-                    let image = try await SCScreenshotManager.captureImage(contentFilter: plan.filter,
-                                                                           configuration: plan.config)
+                    guard let image = try await self.grab(w, content: content, maxSide: w.mode == .text ? 1400 : 480) else {
+                        if w.hidden { w.unreadable = true }
+                        w.nextDue = Date().addingTimeInterval(2)
+                        continue
+                    }
                     if w.error != nil { w.error = nil }
                     var fired = w.ingest(image)
                     var lines: [String]?
@@ -263,6 +270,19 @@ final class WatchManager: ObservableObject {
                 }
             }
         }
+    }
+
+    /// One capture of a watch's region. A window that is on another Desktop or minimized can't be
+    /// seen by ScreenCaptureKit, so it is read from WindowServer directly instead.
+    private func grab(_ w: Watch, content: SCShareableContent, maxSide: CGFloat,
+                      pixelScale: CGFloat = 1) async throws -> CGImage? {
+        if w.usesWindow, w.hidden, let t = w.target {
+            guard let full = OffScreenCapture.image(of: t.windowID) else { return nil }
+            return OffScreenCapture.region(full, local: t.localRect, windowSize: w.windowSize,
+                                           output: w.size(maxSide: maxSide, pixelScale: pixelScale))
+        }
+        guard let plan = plan(for: w, content: content, maxSide: maxSide, pixelScale: pixelScale) else { return nil }
+        return try await SCScreenshotManager.captureImage(contentFilter: plan.filter, configuration: plan.config)
     }
 
     /// Builds the filter and configuration for one capture. A window watch captures the window
@@ -307,8 +327,7 @@ final class WatchManager: ObservableObject {
     private func complete(_ w: Watch, content: SCShareableContent, lines found: [String]?) async {
         var lines = found ?? []
         if found == nil, w.mode == .stops || w.mode == .starts,
-           let plan = plan(for: w, content: content, maxSide: 3000, pixelScale: w.scale),
-           let image = try? await SCScreenshotManager.captureImage(contentFilter: plan.filter, configuration: plan.config) {
+           let image = (try? await grab(w, content: content, maxSide: 3000, pixelScale: w.scale)) ?? nil {
             lines = await Task.detached(priority: .userInitiated) { Analysis.recognizeLines(image) }.value
         }
 

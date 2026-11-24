@@ -215,8 +215,10 @@ struct WatchCard: View {
 
     private var statusText: String {
         if watch.state == .finished { return watch.summary }
-        if watch.hidden { return "On another Desktop or minimized. Paused until it's back." }
-        if watch.unreadable { return "Can't see that window right now. Holding the last frame." }
+        if watch.unreadable {
+            return watch.hidden ? "Can't read that window from another Desktop right now."
+                                : "Can't see that window right now. Holding the last frame."
+        }
         if let e = watch.error { return e }
         switch watch.mode {
         case .text:
@@ -233,7 +235,7 @@ struct WatchCard: View {
     }
 
     private var dotColor: Color {
-        if watch.hidden || watch.unreadable { return .gray }
+        if watch.unreadable { return .gray }
         if watch.error != nil { return .red }
         switch watch.state {
         case .armed: return (watch.mode == .every && watch.changing) ? .orange : .blue
@@ -269,9 +271,15 @@ struct WatchCard: View {
             }
 
             if watch.hidden {
-                Text("Tip: to keep watching across Desktops, right-click \(watch.target?.app ?? "the app") in the Dock, choose Options, then Assign To: All Desktops.")
-                    .font(.caption2).foregroundStyle(.secondary)
-                    .transition(.opacity)
+                if watch.unreadable {
+                    Text("macOS wouldn't hand over that window. To be safe, right-click \(watch.target?.app ?? "the app") in the Dock, choose Options, then Assign To: All Desktops.")
+                        .font(.caption2).foregroundStyle(.secondary)
+                        .transition(.opacity)
+                } else {
+                    Label("On another Desktop. Still watching.", systemImage: "rectangle.on.rectangle")
+                        .font(.caption2).foregroundStyle(.green)
+                        .transition(.opacity)
+                }
             }
 
             if let img = watch.preview {
@@ -280,9 +288,9 @@ struct WatchCard: View {
                     .frame(maxHeight: 70)
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .frame(maxWidth: .infinity)
-                    .opacity(watch.hidden || watch.unreadable ? 0.35 : 1)
+                    .opacity(watch.unreadable ? 0.35 : 1)
                     .overlay {
-                        if watch.hidden || watch.unreadable {
+                        if watch.unreadable {
                             Image(systemName: "rectangle.on.rectangle.slash")
                                 .font(.title2).foregroundStyle(.secondary)
                         }

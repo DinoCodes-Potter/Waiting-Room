@@ -77,6 +77,8 @@ final class Watch: ObservableObject, Identifiable {
         let title: String
         /// Region inside the window: points, origin top-left, relative to the window.
         let localRect: CGRect
+        /// Size of the whole window in points when the watch was created.
+        let windowSize: CGSize
     }
 
     let id = UUID()
@@ -112,6 +114,7 @@ final class Watch: ObservableObject, Identifiable {
     static let activityLength = 48
 
     var nextDue = Date.distantPast
+    var windowSize: CGSize
     var finishedAt: Date?
 
     private var prev1: [UInt32]?
@@ -132,6 +135,7 @@ final class Watch: ObservableObject, Identifiable {
         self.displayID = displayID
         self.scale = scale
         self.target = target
+        self.windowSize = target?.windowSize ?? .zero
     }
 
     var usesWindow: Bool { followWindow && target != nil }
