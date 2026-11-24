@@ -72,7 +72,7 @@ main{position:relative;z-index:1}
 .mbx.alert .badge{display:block;animation:pulse 1s ease-in-out 4}
 @keyframes pulse{50%{transform:scale(1.7);opacity:.5}}
 .tip{position:fixed;z-index:899;top:38px;right:44px;background:var(--ink);color:var(--wall);font-size:13px;font-weight:600;padding:7px 12px;border-radius:9px;pointer-events:none;animation:bob 1.7s ease-in-out infinite;max-width:calc(100vw - 24px)}
-.tip::before{content:"";position:absolute;right:16px;top:-4px;width:9px;height:9px;background:var(--ink);transform:rotate(45deg)}
+.tip::before{content:"";position:absolute;left:calc(var(--ax,calc(100% - 20px)) - 4.5px);top:-4px;width:9px;height:9px;background:var(--ink);transform:rotate(45deg)}
 @keyframes bob{50%{transform:translateY(4px)}}
 
 /* ---------- hero ---------- */
@@ -503,11 +503,14 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
 .fold{width:84px;height:66px;margin-top:10px;border-radius:8px 8px 10px 10px;background:#58a6ff;position:relative;animation:bump 8s infinite}
 .fold::before{content:"";position:absolute;left:0;top:-9px;width:34px;height:12px;border-radius:6px 6px 0 0;background:#58a6ff}
 .fold::after{content:"";position:absolute;inset:6px 0 0;border-radius:6px 6px 10px 10px;background:linear-gradient(#8cc4ff,#4a95ee)}
+.scene__body figure{position:relative;width:120px}
 .scene__app{animation:drag 8s infinite cubic-bezier(.5,0,.3,1)}
-.scene__cur{position:absolute;left:calc(12% + 52px);top:calc(56px + 52px);width:22px;height:22px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));animation:dragc 8s infinite cubic-bezier(.5,0,.3,1)}
+.scene__app .ico,.scene__app .lbl{animation:dropi 8s infinite}
+.scene__cur{position:absolute;left:55px;top:36px;width:22px;height:22px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));animation:curs 8s infinite}
 .scene__cap{padding:0 20px 20px;text-align:center;font:600 13px var(--mono);color:#5b5648}
-@keyframes drag{0%,12%{transform:none;opacity:1}42%{transform:translateX(calc(76cqw - 76px - 8px));opacity:1}48%{transform:translateX(calc(76cqw - 76px - 8px)) scale(.3);opacity:0}92%{transform:translateX(calc(76cqw - 76px - 8px)) scale(.3);opacity:0}93%{transform:none;opacity:0}100%{transform:none;opacity:1}}
-@keyframes dragc{0%,12%{transform:none;opacity:1}42%{transform:translateX(calc(76cqw - 76px - 8px));opacity:1}52%{transform:translate(calc(76cqw - 76px + 30px),30px);opacity:1}60%,92%{transform:translate(calc(76cqw - 76px + 30px),30px);opacity:0}93%{transform:none;opacity:0}100%{transform:none;opacity:1}}
+@keyframes drag{0%,12%{transform:none}42%,92%{transform:translateX(calc(100cqw - 120px))}93%,100%{transform:none}}
+@keyframes dropi{0%,42%{opacity:1;transform:none}49%{opacity:0;transform:scale(.25)}92%{opacity:0;transform:scale(.25)}93%{opacity:0;transform:none}100%{opacity:1;transform:none}}
+@keyframes curs{0%,42%{opacity:1;transform:none}52%{opacity:1;transform:translate(16px,18px)}58%,92%{opacity:0;transform:translate(16px,18px)}93%{opacity:0;transform:none}100%{opacity:1;transform:none}}
 @keyframes bump{0%,44%{transform:none}48%{transform:scale(1.12)}54%,100%{transform:none}}
 @keyframes hgpop{0%,50%{transform:scale(0)}58%{transform:scale(1.35)}64%,92%{transform:scale(1)}100%{transform:scale(0)}}
 /* privacy monitor */
@@ -554,7 +557,7 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
 .facts__g div{transition:background .3s}
 .facts__g div:hover{background:color-mix(in srgb,var(--amber) 22%,transparent)}
 @media(max-width:860px){.inst,.faq2,.priv{grid-template-columns:1fr;gap:36px}.sticky{position:static}.sec{padding:64px 0}}
-@media(prefers-reduced-motion:reduce){.js .rv{opacity:1}.js .rv.in{animation:none}.motes{display:none}.cmp__bad li span{text-decoration-color:currentColor}.scene__app,.scene__cur,.fold,.scene__hg,.mon__g .sw,.mon__l ul{animation:none}.scene__hg{transform:none}}
+@media(prefers-reduced-motion:reduce){.js .rv{opacity:1}.js .rv.in{animation:none}.motes{display:none}.cmp__bad li span{text-decoration-color:currentColor}.scene__app,.scene__app .ico,.scene__app .lbl,.scene__cur,.fold,.scene__hg,.mon__g .sw,.mon__l ul{animation:none}.scene__hg{transform:none}}
 
 /* how-it-works mini demo */
 .hdemo{margin-top:40px;max-width:470px}
@@ -899,9 +902,8 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
       <div class="sticky"><div class="scene" aria-hidden="true">
         <div class="scene__bar"><span><b>Finder</b>&nbsp;&nbsp;File&nbsp;&nbsp;Edit&nbsp;&nbsp;View</span><i class="scene__hg"><svg viewBox="0 0 24 24"><path d="M6 3h12M6 21h12M7 3c0 6 5 6 5 9s-5 3-5 9M17 3c0 6-5 6-5 9s5 3 5 9"/></svg></i></div>
         <div class="scene__body">
-          <figure class="scene__app"><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h12M6 21h12M7 3c0 6 5 6 5 9s-5 3-5 9M17 3c0 6-5 6-5 9s5 3 5 9"/></svg></div>Waiting Room</figure>
+          <figure class="scene__app"><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h12M6 21h12M7 3c0 6 5 6 5 9s-5 3-5 9M17 3c0 6-5 6-5 9s5 3 5 9"/></svg></div><span class="lbl">Waiting Room</span><svg class="scene__cur" viewBox="0 0 24 24"><path d="M5 2l14 10-6 1.4 3.4 6.6-3 1.6-3.4-6.6L5 19z" fill="#fff" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/></svg></figure>
           <figure><div class="fold"></div>Applications</figure>
-          <svg class="scene__cur" viewBox="0 0 24 24"><path d="M5 2l14 10-6 1.4 3.4 6.6-3 1.6-3.4-6.6L5 19z" fill="#fff" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/></svg>
         </div>
         <p class="scene__cap">Drag, drop, look for the hourglass.</p>
       </div></div></div>
@@ -1238,6 +1240,10 @@ m.style.cssText='left:'+(Math.random()*100)+'%;top:'+(20+Math.random()*80)+'%;wi
 document.body.insertBefore(mo,document.body.firstChild)}
 })();
 
+
+(function(){var t=document.querySelector('.tip'),h=document.getElementById('hg');if(!t||!h)return;
+function place(){var w=t.offsetWidth;if(!w)return;var r=h.getBoundingClientRect(),c=r.left+r.width/2,l=Math.min(Math.max(8,c-w/2),innerWidth-w-8);t.style.right='auto';t.style.left=l+'px';t.style.setProperty('--ax',(c-l)+'px')}
+place();addEventListener('resize',place);addEventListener('load',place);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place)})();
 </script>
 </body>
 </html>
