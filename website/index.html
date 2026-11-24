@@ -504,14 +504,16 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
 .fold::before{content:"";position:absolute;left:0;top:-9px;width:34px;height:12px;border-radius:6px 6px 0 0;background:#58a6ff}
 .fold::after{content:"";position:absolute;inset:6px 0 0;border-radius:6px 6px 10px 10px;background:linear-gradient(#8cc4ff,#4a95ee)}
 .scene__body figure{position:relative;width:120px}
-.scene__app{animation:drag 8s infinite cubic-bezier(.5,0,.3,1)}
-.scene__app .ico,.scene__app .lbl{animation:dropi 8s infinite}
+.scene__app{z-index:2;animation:drag 8s infinite cubic-bezier(.5,0,.3,1)}
+.scene__app .ico{animation:dropi 8s infinite}
+.scene__app .lbl{animation:lblf 8s infinite}
 .scene__cur{position:absolute;left:55px;top:36px;width:22px;height:22px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));animation:curs 8s infinite}
 .scene__cap{padding:0 20px 20px;text-align:center;font:600 13px var(--mono);color:#5b5648}
 @keyframes drag{0%,12%{transform:none}42%,92%{transform:translateX(calc(100cqw - 120px))}93%,100%{transform:none}}
-@keyframes dropi{0%,42%{opacity:1;transform:none}49%{opacity:0;transform:scale(.25)}92%{opacity:0;transform:scale(.25)}93%{opacity:0;transform:none}100%{opacity:1;transform:none}}
+@keyframes dropi{0%,42%{opacity:1;transform:none}46%{opacity:1;transform:scale(1.08)}53%{opacity:0;transform:translateY(8px) scale(.2)}92%{opacity:0;transform:scale(.25)}93%{opacity:0;transform:none}100%{opacity:1;transform:none}}
+@keyframes lblf{0%,22%{opacity:1}34%,92%{opacity:0}93%{opacity:0}100%{opacity:1}}
 @keyframes curs{0%,42%{opacity:1;transform:none}52%{opacity:1;transform:translate(16px,18px)}58%,92%{opacity:0;transform:translate(16px,18px)}93%{opacity:0;transform:none}100%{opacity:1;transform:none}}
-@keyframes bump{0%,44%{transform:none}48%{transform:scale(1.12)}54%,100%{transform:none}}
+@keyframes bump{0%,48%{transform:none}53%{transform:scale(1.14)}60%,100%{transform:none}}
 @keyframes hgpop{0%,50%{transform:scale(0)}58%{transform:scale(1.35)}64%,92%{transform:scale(1)}100%{transform:scale(0)}}
 /* privacy monitor */
 .mon{border-radius:16px;background:#0a0807;border:2px solid #2d2320;box-shadow:0 0 0 1px #000,0 30px 50px -30px #000;overflow:hidden;font:500 13px/1.9 var(--mono);color:#e3c58c}
