@@ -13,7 +13,7 @@
 </p>
 
 <p>
-  <a href="https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg"><strong>Download for macOS</strong></a> &middot;
+  <a href="https://github.com/DinoCodes-Potter/Waiting-Room/releases/latest"><strong>Download for macOS</strong></a> &middot;
   <a href="https://dinocodes-potter.github.io/Waiting-Room/">Website</a> &middot;
   <a href="https://github.com/DinoCodes-Potter/Waiting-Room/issues/new?template=bug_report.yml">Report a bug</a>
 </p>
@@ -26,22 +26,27 @@ Drag a box around anything slow, such as a build log, a progress bar, a file tra
 
 ## Features
 
-- **Watch any region.** Select a rectangle on any connected display.
+- **Keeps watching when another window covers it.** Waiting Room captures the window under your selection, not the screen, so you can cover it, move it or work in other apps. If you move the window, the watched region moves with it.
+- **Watch any region.** Select a rectangle on any connected display, from the menu or with **Control-Option-W** in any app.
 - **Watch several things at once.** Every watch runs independently, with its own name, mode and sensitivity.
-- **Three alert modes.**
+- **Four alert modes.**
   - *Stops*: alert when the region has been still for a set time (2 to 60 seconds).
   - *Starts*: alert the moment something changes.
   - *Any change*: alert on every change, with a short cooldown.
+  - *Text*: alert when a phrase you typed, such as `BUILD SUCCEEDED`, appears in the region (read on-device).
+- **Presets.** One tap sets sensible values for a *Build*, a *Download* or an *AI agent* (agents pause to think, so they wait longer).
+- **See what it sees.** Corner brackets mark every watched region on screen. They pulse while it changes and turn green when done. Each watch card shows a live line of recent activity and a ring that fills as the region stays quiet.
 - **Pixel-level detection.** Each region is captured every second (every two seconds while a *Stops* watch is waiting for activity to begin), which is enough to catch slowly advancing progress bars.
 - **Fewer false alarms.** A pixel only counts as changed if it differs from both of the previous two frames, so blinking terminal cursors are ignored.
 - **Adjustable sensitivity.** Choose High, Medium or Low.
 - **Reads the screen when it fires.** On-device text recognition (Apple Vision) reads the region and flags whether it looks like a success or an error.
-- **Native alerts.** A banner on the watched display, a macOS notification, and a chime.
+- **Native alerts.** An animated banner on the watched display, a macOS notification, and a chime you can turn off. The menu bar hourglass turns over while something is being watched.
+- **Pause, open at login.** Pause every watch with one click, and start Waiting Room when you log in.
 - **Light on resources.** Capture pauses while the screen sleeps or the session is locked, and slows down in Low Power Mode. Waiting Room never captures its own windows.
 
 ## Install
 
-1. [Download the latest DMG](https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg).
+1. [Download the latest DMG](https://github.com/DinoCodes-Potter/Waiting-Room/releases/latest).
 2. Open it and drag **Waiting Room** into **Applications**.
 3. Open Waiting Room. It lives in your menu bar (look for the hourglass).
 
@@ -62,9 +67,10 @@ To compare pixels, Waiting Room needs the **Screen Recording** permission. Click
 ### Verify your download
 
 ```sh
-shasum -a 256 WaitingRoom-0.1.dmg
-# b64578218910663ed07dd76904f5e0e1253a18900cefda2f6f50419d6e61cc6a
+shasum -a 256 WaitingRoom-<version>.dmg
 ```
+
+Compare the result with the checksum shown on the [website](https://dinocodes-potter.github.io/Waiting-Room/#install).
 
 ### Requirements
 
@@ -74,8 +80,8 @@ shasum -a 256 WaitingRoom-0.1.dmg
 ## How it works
 
 1. **Select a region.** Choose **Watch a region…** from the menu bar. Your screens dim and you drag a rectangle around what you want to watch.
-2. **Choose an alert.** Pick *Stops*, *Starts* or *Any change*. For *Stops*, set how long the region must stay still, and the sensitivity.
-3. **Let it watch.** Waiting Room captures a small copy of the region and compares it with the previous two frames.
+2. **Choose an alert.** Pick *Stops*, *Starts*, *Any change* or *Text*. For *Stops*, set how long the region must stay still, and the sensitivity.
+3. **Let it watch.** Waiting Room captures a small copy of the region, from the window itself so overlapping windows don't matter, and compares it with the previous two frames.
 4. **Get notified.** When the condition is met, Waiting Room reads the visible text and tells you what happened, for example:
 
    > **Watch 1: done**
@@ -106,6 +112,14 @@ swift build -c release
 
 > **Note**
 > When run directly from the command line the app has no bundle identifier, so macOS notifications are skipped. The on-screen banner and chime still work. Run it from an app bundle to get full notifications.
+
+### Build a release DMG
+
+```sh
+scripts/make-dmg.sh 0.2
+```
+
+This builds an ad-hoc signed `Waiting Room.app` and a drag-to-install DMG in `dist/`. The **Release** workflow does the same on a macOS runner and publishes it as a GitHub Release, which the website then serves.
 
 ## Project layout
 

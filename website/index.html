@@ -463,7 +463,7 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
 .win__b{padding:22px 24px 26px;display:grid;gap:20px}
 .fld label,.fld>span{display:flex;justify-content:space-between;font:600 13px var(--mono);margin-bottom:8px}
 .fld output{font-weight:700}
-.pseg{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--paper-ink);border-radius:10px;overflow:hidden}
+.pseg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:2px solid var(--paper-ink);border-radius:10px;overflow:hidden}
 .pseg button{padding:9px 6px;border:0;border-left:2px solid var(--paper-ink);background:none;font:600 14px var(--sans);cursor:pointer;color:var(--paper-ink);transition:background .2s,color .2s}
 .pseg button:first-child{border-left:0}
 .pseg button[aria-pressed="true"]{background:var(--paper-ink);color:var(--paper)}
@@ -596,7 +596,7 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
   </div>
   <div class="mbar__r">
     <button id="lights" type="button" aria-label="Turn the lights off" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></button>
-    <a class="mbar__dl" data-dl href="https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg">Download</a>
+    <a class="mbar__dl" data-dl href="download/WaitingRoom.dmg">Download</a>
     <button class="mbx ring" id="hg" type="button" aria-label="Waiting Room menu" aria-haspopup="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9"/></svg><i class="badge"></i></button>
     <time id="clock">Sun 9:41</time>
   </div>
@@ -611,13 +611,13 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
         <h1><span class="ln"><span>go make a coffee.</span></span><span class="ln"><span>we'll watch the screen.</span></span></h1>
         <p class="lead">Waiting Room is a Mac menu bar app. Drag a box around a build, a download or an AI agent's output, and it tells you the moment it stops changing.</p>
         <div class="hero__cta">
-          <a class="ticket" id="dl1" data-dl href="https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg" aria-label="Download Waiting Room for macOS">
+          <a class="ticket" id="dl1" data-dl href="download/WaitingRoom.dmg" aria-label="Download Waiting Room for macOS">
             <span class="ticket__stub"><small>No.</small><b data-num>039</b></span>
             <span class="ticket__main"><span><strong>Download for macOS</strong><small>Free · Apple silicon · macOS 14+</small></span><span class="ticket__go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></span></span>
           </a>
           <button class="btn" id="show" type="button">Show me</button>
         </div>
-        <p class="fine">Version 0.1 · 1.1 MB · open source, MIT licence</p>
+        <p class="fine">Version <span data-ver>0.1</span> · <span data-size>1.1 MB</span> · open source, MIT licence</p>
       </div>
 
       <div class="room">
@@ -724,7 +724,7 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
         <div class="win__b">
           <div class="fld"><label for="pname">Name</label><input id="pname" type="text" value="Release build" maxlength="24" autocomplete="off"></div>
           <div class="fld"><span>Alert me when it</span>
-            <div class="pseg" id="pmode"><button type="button" aria-pressed="true" data-v="stops">Stops</button><button type="button" aria-pressed="false" data-v="starts">Starts</button><button type="button" aria-pressed="false" data-v="any">Changes</button></div></div>
+            <div class="pseg" id="pmode"><button type="button" aria-pressed="true" data-v="stops">Stops</button><button type="button" aria-pressed="false" data-v="starts">Starts</button><button type="button" aria-pressed="false" data-v="any">Changes</button><button type="button" aria-pressed="false" data-v="text">Text</button></div></div>
           <div class="fld"><label for="pstill">Still for <output id="pstillo">10 s</output></label><input id="pstill" type="range" min="2" max="60" value="10"></div>
           <div class="fld"><span>Sensitivity</span>
             <div class="pseg" id="psens"><button type="button" aria-pressed="false" data-v="Low">Low</button><button type="button" aria-pressed="true" data-v="Medium">Medium</button><button type="button" aria-pressed="false" data-v="High">High</button></div></div>
@@ -768,6 +768,21 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
           <svg viewBox="0 0 56 56" aria-hidden="true"><rect width="56" height="56" rx="10" fill="#1f8a4c"/><rect x="11" y="20" width="30" height="16" rx="3" fill="none" stroke="#fff" stroke-width="3"/><path d="M45 26v4M17 28h10" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
           <h3>Quiet on resources</h3>
           <p>Capture pauses while the screen sleeps or the session is locked, and slows down in Low Power Mode.</p>
+        </article>
+        <article class="sg" style="--d:0.72s">
+          <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="27" fill="#1f5fbf"/><rect x="12" y="14" width="24" height="18" rx="2" fill="none" stroke="#fff" stroke-width="3"/><rect x="22" y="24" width="22" height="16" rx="2" fill="#1f5fbf" stroke="#fff" stroke-width="3"/></svg>
+          <h3>Works behind other windows</h3>
+          <p>Waiting Room watches the window itself, not the screen. Cover it, move it or switch Spaces and it carries on.</p>
+        </article>
+        <article class="sg" style="--d:0.84s">
+          <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="27" fill="#1f8a4c"/><path d="M16 20h24M16 28h16M16 36h20" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg>
+          <h3>Waits for a word</h3>
+          <p>Type BUILD SUCCEEDED, or any phrase, and get told the moment it appears in the region.</p>
+        </article>
+        <article class="sg" style="--d:0.96s">
+          <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="27" fill="#1f5fbf"/><rect x="13" y="16" width="30" height="24" rx="4" fill="none" stroke="#fff" stroke-width="3"/><path d="M21 28h14M28 21v14" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+          <h3>Start from anywhere</h3>
+          <p>Press Control-Option-W in any app, drag a box and you're watching. No hunting for the menu bar.</p>
         </article>
       </div>
     </div>
@@ -894,12 +909,12 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
         <div class="ticket ticket--static"><span class="ticket__stub"><small>No.</small><b>003</b></span><span class="ticket__main"><span><strong>Allow recording</strong><p>Grant Screen Recording so it can compare pixels, then quit and reopen. Drag a box and you're off.</p></span></span></div>
       </div>
       <div class="take__go">
-        <a class="ticket ticket--lg" data-dl href="https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg">
+        <a class="ticket ticket--lg" data-dl href="download/WaitingRoom.dmg">
           <span class="ticket__stub"><small>No.</small><b data-num>039</b></span>
-          <span class="ticket__main"><span><strong>Download for macOS</strong><small>Version 0.1 · 1.1 MB</small></span><span class="ticket__go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></span></span>
+          <span class="ticket__main"><span><strong>Download for macOS</strong><small>Version <span data-ver>0.1</span> · <span data-size>1.1 MB</span></small></span><span class="ticket__go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></span></span>
         </a>
       </div>
-      <details class="verify"><summary>Verify the download</summary>SHA-256 of WaitingRoom-0.1.dmg:<code>b64578218910663ed07dd76904f5e0e1253a18900cefda2f6f50419d6e61cc6a</code></details>
+      <details class="verify"><summary>Verify the download</summary>SHA-256 of WaitingRoom-<span data-ver>0.1</span>.dmg:<code id="sha">b64578218910663ed07dd76904f5e0e1253a18900cefda2f6f50419d6e61cc6a</code></details>
       </div>
       <div class="sticky"><div class="scene" aria-hidden="true">
         <div class="scene__bar"><span><b>Finder</b>&nbsp;&nbsp;File&nbsp;&nbsp;Edit&nbsp;&nbsp;View</span><i class="scene__hg"><svg viewBox="0 0 24 24"><path d="M6 3h12M6 21h12M7 3c0 6 5 6 5 9s-5 3-5 9M17 3c0 6-5 6-5 9s5 3 5 9"/></svg></i></div>
@@ -928,7 +943,7 @@ swift build -c release
         <article class="pn" style="--r:.8deg"><h3>Not notarized yet</h3>macOS blocks the first launch. Allow it once under System Settings, Privacy &amp; Security, Open Anyway.</article>
         <article class="pn" style="--r:-.6deg;--c:#d8e8fb"><h3>Keep the region visible</h3>Waiting Room compares what is on screen. If another window covers the region, it sees that window instead.</article>
         <article class="pn" style="--r:1.3deg;--c:#fbdcd6"><h3>Screen Recording required</h3>macOS asks once. Grant it, then quit and reopen the app.</article>
-        <article class="pn" style="--r:-1deg"><h3>Version 0.1</h3>Early days. Found a bug? <a href="https://github.com/DinoCodes-Potter/Waiting-Room/issues/new?template=bug_report.yml" target="_blank" rel="noopener">Tell us</a>.</article>
+        <article class="pn" style="--r:-1deg"><h3>Version 0.2</h3>Now works behind other windows. Found a bug? <a href="https://github.com/DinoCodes-Potter/Waiting-Room/issues/new?template=bug_report.yml" target="_blank" rel="noopener">Tell us</a>.</article>
         <article class="pn" style="--r:.6deg;--c:#fdf0a8"><h3>Free and open source</h3>MIT licensed. Read it, fork it, build it. <a href="https://github.com/DinoCodes-Potter/Waiting-Room" target="_blank" rel="noopener">Source on GitHub</a>.</article>
       </div>
     </div>
@@ -967,7 +982,7 @@ swift build -c release
       <h2>your number is up.</h2>
       <p class="sub">Go make that coffee.</p>
       <div class="hero__cta">
-        <a class="ticket ticket--lg" data-dl href="https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg">
+        <a class="ticket ticket--lg" data-dl href="download/WaitingRoom.dmg">
           <span class="ticket__stub"><small>No.</small><b data-num>039</b></span>
           <span class="ticket__main"><span><strong>Download Waiting Room</strong><small>Free · open source</small></span><span class="ticket__go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></span></span>
         </a>
@@ -1163,7 +1178,7 @@ function status(s){wst.textContent=s;var w=$('#ws');if(w)w.textContent=s;if(A.st
 function verdict(){return 'Now serving '+pad(board.n)+'.'}
 var soundOK=0;
 function chime(){if(!soundOK)return;try{var a=new (window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator(),o2=a.createOscillator(),g=a.createGain();o.frequency.value=659;o2.frequency.value=523;g.gain.setValueAtTime(.0001,a.currentTime);g.gain.exponentialRampToValueAtTime(.08,a.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.9);o.connect(g);o2.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.4);o2.start(a.currentTime+.4);o2.stop(a.currentTime+1)}catch(e){}}
-function fire(kind,pre){note.innerHTML='<button type="button" aria-label="Dismiss" id="nx">×</button><small>WAITING ROOM</small><strong>Watch 1: '+kind+'</strong>'+pre+' '+verdict()+'<br><a data-dl href="https://github.com/DinoCodes-Potter/Waiting-Room/raw/main/WaitingRoom-0.1.dmg">That was the app. Take a number.</a>';
+function fire(kind,pre){note.innerHTML='<button type="button" aria-label="Dismiss" id="nx">×</button><small>WAITING ROOM</small><strong>Watch 1: '+kind+'</strong>'+pre+' '+verdict()+'<br><a data-dl href="download/WaitingRoom.dmg">That was the app. Take a number.</a>';
  $('#nx').onclick=function(){note.classList.remove('show')};
  clearTimeout(note.t);note.t=setTimeout(function(){note.classList.remove('show')},11000);
  note.classList.add('show');hg.classList.add('alert');setTimeout(function(){hg.classList.remove('alert')},4500);chime()}
@@ -1220,6 +1235,7 @@ function r(){var n=esc(nm.value.trim()||'Watch 1'),t=st.value,sens={Low:'Only bi
  so_.textContent=t+' s';$('#pstill').parentNode.style.opacity=m==='stops'?1:.35;st.disabled=m!=='stops';
  if(m==='stops')q='Waiting Room watches <b>'+n+'</b> and tells you once it has been still for <b>'+t+' seconds</b>.';
  else if(m==='starts')q='Waiting Room watches <b>'+n+'</b> and tells you the moment it starts to change.';
+ else if(m==='text')q='Waiting Room reads <b>'+n+'</b> and tells you when it sees the words you typed.';
  else q='Waiting Room tells you every time <b>'+n+'</b> changes, with a short cooldown so it never nags.';
  sy.innerHTML=q+'<br>Sensitivity '+sn.toLowerCase()+'. '+sens}
 function seg(id,fn){$$(id+' button').forEach(function(b){b.onclick=function(){$$(id+' button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});fn(b.dataset.v);r()}})}
@@ -1246,6 +1262,12 @@ document.body.insertBefore(mo,document.body.firstChild)}
 (function(){var t=document.querySelector('.tip'),h=document.getElementById('hg');if(!t||!h)return;
 function place(){var w=t.offsetWidth;if(!w)return;var r=h.getBoundingClientRect(),c=r.left+r.width/2,l=Math.min(Math.max(8,c-w/2),innerWidth-w-8);t.style.right='auto';t.style.left=l+'px';t.style.setProperty('--ax',(c-l)+'px')}
 place();addEventListener('resize',place);addEventListener('load',place);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place)})();
+
+(function(){if(location.protocol==='file:')return;
+fetch('download/meta.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(m){if(!m)return;
+document.querySelectorAll('[data-ver]').forEach(function(e){e.textContent=m.version});
+document.querySelectorAll('[data-size]').forEach(function(e){e.textContent=(m.bytes/1048576).toFixed(1)+' MB'});
+var h=document.getElementById('sha');if(h)h.textContent=m.sha256}).catch(function(){})})();
 </script>
 </body>
 </html>
