@@ -142,7 +142,7 @@ a.ticket:hover .ticket__go{transform:translateX(3px)}
 @keyframes blink{50%{opacity:0}}
 
 /* ---------- sections ---------- */
-.sec{padding:120px 0}
+.sec{padding:84px 0}
 h2{font-weight:800;font-size:clamp(36px,5.4vw,76px);line-height:.98;letter-spacing:-.04em}
 .sub{margin-top:20px;max-width:30em;color:var(--mut);font-size:18px}
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
@@ -192,18 +192,18 @@ h2{font-weight:800;font-size:clamp(36px,5.4vw,76px);line-height:.98;letter-spaci
 .cam__ft{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:12px var(--mono);color:#b9a79c}
 
 /* lights-off room for privacy */
-.night{position:relative;color:#e6f0e3;padding:200px 0;background:linear-gradient(180deg,var(--wall) 0,var(--night) 200px,var(--night) calc(100% - 200px),var(--wall) 100%);transition:background .7s}
+.night{position:relative;color:#e6f0e3;padding:130px 0;background:linear-gradient(180deg,var(--wall) 0,var(--night) 120px,var(--night) calc(100% - 120px),var(--wall) 100%);transition:background .7s}
 .night h2{max-width:11em;font-size:clamp(44px,8vw,116px)}
 .night .sub{color:#a9bdb0;max-width:34em}
 .night a{text-decoration:underline;text-underline-offset:.2em}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:72px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:44px}
 .stat{padding:22px 22px 18px;border-radius:18px;background:#151010;box-shadow:inset 0 0 0 2px #2d2320}
 .stat .seg{--led:var(--amber);display:block;width:100%;max-width:230px}
 .stat .seg rect.on{filter:drop-shadow(0 0 7px rgba(255,181,46,.85))}
 .stat span{display:block;margin-top:12px;font:500 13px var(--mono);color:#cdbfa7;letter-spacing:.04em}
 
 /* take a number */
-.tk{display:grid;gap:22px;margin-top:56px;max-width:640px}
+.tk{display:grid;gap:18px;margin-top:36px;max-width:640px}
 .tk .ticket__main{flex:1}
 .tk p{font-size:15px;color:#5b5648;margin-top:2px}
 .take__go{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:52px}
@@ -215,7 +215,7 @@ h2{font-weight:800;font-size:clamp(36px,5.4vw,76px);line-height:.98;letter-spaci
 .verify code{display:block;margin-top:8px;font:12.5px var(--mono);word-break:break-all}
 
 /* reception (faq) */
-.faq{border-top:2px solid var(--ink);margin-top:56px;max-width:820px}
+.faq{border-top:2px solid var(--ink)}
 .faq details{border-bottom:2px solid var(--ink)}
 .faq summary{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 2px;cursor:pointer;list-style:none;font-size:22px;font-weight:700;letter-spacing:-.025em;line-height:1.2}
 .faq summary::-webkit-details-marker{display:none}
@@ -224,7 +224,7 @@ h2{font-weight:800;font-size:clamp(36px,5.4vw,76px);line-height:.98;letter-spaci
 .faq p{padding:0 2px 24px;max-width:36em;color:var(--mut)}
 
 /* the end */
-.final{text-align:center;padding:140px 0 120px}
+.final{text-align:center;padding:90px 0 70px}
 .final h2{font-size:clamp(44px,8.6vw,124px);margin:0 auto;max-width:9em}
 .final .sub{margin:22px auto 0}
 .final .hero__cta{justify-content:center;margin-top:44px}
@@ -376,7 +376,7 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
 .reveal-all .pn{opacity:1;animation:none}
 
 /* the bench: please take a seat */
-.bench{display:block;width:min(660px,92%);height:auto;margin:72px auto 0;overflow:visible}
+.bench{display:block;width:min(660px,92%);height:auto;margin:48px auto 0;overflow:visible}
 .bench .steam path{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round;opacity:0;animation:steam 2.8s ease-in-out infinite}
 .bench .steam path:nth-child(2){animation-delay:.9s}.bench .steam path:nth-child(3){animation-delay:1.8s}
 @keyframes steam{0%{opacity:0;transform:translateY(5px)}35%{opacity:.7}100%{opacity:0;transform:translateY(-12px)}}
@@ -440,6 +440,8 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
 .pa__t span{padding:14px 28px;white-space:nowrap}
 .pa__t span::before{content:"\25CF";margin-right:14px;color:var(--led);font-size:10px;vertical-align:2px}
 @keyframes pa{to{transform:translateX(-50%)}}
+.pa--r .pa__t{animation-direction:reverse;animation-duration:60s}
+.pa--r{margin-top:20px}
 /* ---------- facts band ---------- */
 .facts{padding:56px 0 0}
 .facts__g{display:grid;grid-template-columns:repeat(4,1fr);border:3px solid var(--ink);border-radius:18px;background:color-mix(in srgb,var(--paper) 55%,transparent);overflow:hidden}
@@ -478,6 +480,78 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
 .cmp__bad li span{text-decoration:line-through;text-decoration-thickness:1.5px;opacity:.75}
 @media(max-width:860px){.facts__g{grid-template-columns:1fr 1fr}.facts__g div:nth-child(3){border-left:0}.facts__g div:nth-child(n+3){border-top:2px dashed var(--line)}.ctl,.cmp{grid-template-columns:1fr;gap:32px}}
 @media(prefers-reduced-motion:reduce){.pa__t{animation:none}}
+
+/* ---------- layout fillers ---------- */
+.inst{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:start}
+.sticky{position:sticky;top:84px}
+.faq2{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:64px;align-items:start}
+.faq2 .btn{margin-top:28px}
+.priv{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:center}
+.priv h2{max-width:8em}
+/* install scene */
+.scene{border-radius:18px;background:var(--paper);color:var(--paper-ink);border:3px solid var(--paper-ink);box-shadow:0 26px 40px -22px rgba(18,32,26,.55);overflow:hidden}
+.scene__bar{display:flex;justify-content:space-between;align-items:center;padding:6px 14px;background:#efe7cd;border-bottom:2px solid var(--paper-ink);font:600 12px var(--sans)}
+.scene__hg{display:grid;place-items:center;width:22px;height:20px;border-radius:5px;transform:scale(0);animation:hgpop 8s infinite}
+.scene__hg svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.scene__body{container-type:inline-size;position:relative;display:flex;justify-content:space-between;align-items:center;padding:56px 12% 40px;min-height:230px}
+.scene__body figure{display:grid;justify-items:center;gap:8px;font:600 12px var(--sans)}
+.ico{width:76px;height:76px;border-radius:18px;background:linear-gradient(160deg,#2a74e0,#0f3d8f);display:grid;place-items:center;box-shadow:0 8px 14px -6px rgba(0,0,0,.45)}
+.ico svg{width:40px;height:40px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.fold{width:84px;height:66px;margin-top:10px;border-radius:8px 8px 10px 10px;background:#58a6ff;position:relative;animation:bump 8s infinite}
+.fold::before{content:"";position:absolute;left:0;top:-9px;width:34px;height:12px;border-radius:6px 6px 0 0;background:#58a6ff}
+.fold::after{content:"";position:absolute;inset:6px 0 0;border-radius:6px 6px 10px 10px;background:linear-gradient(#8cc4ff,#4a95ee)}
+.scene__app{animation:drag 8s infinite cubic-bezier(.5,0,.3,1)}
+.scene__cur{position:absolute;left:calc(12% + 52px);top:calc(56px + 52px);width:22px;height:22px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));animation:dragc 8s infinite cubic-bezier(.5,0,.3,1)}
+.scene__cap{padding:0 20px 20px;text-align:center;font:600 13px var(--mono);color:#5b5648}
+@keyframes drag{0%,12%{transform:none;opacity:1}42%{transform:translateX(calc(76cqw - 76px - 8px));opacity:1}48%{transform:translateX(calc(76cqw - 76px - 8px)) scale(.3);opacity:0}92%{transform:translateX(calc(76cqw - 76px - 8px)) scale(.3);opacity:0}93%{transform:none;opacity:0}100%{transform:none;opacity:1}}
+@keyframes dragc{0%,12%{transform:none;opacity:1}42%{transform:translateX(calc(76cqw - 76px - 8px));opacity:1}52%{transform:translate(calc(76cqw - 76px + 30px),30px);opacity:1}60%,92%{transform:translate(calc(76cqw - 76px + 30px),30px);opacity:0}93%{transform:none;opacity:0}100%{transform:none;opacity:1}}
+@keyframes bump{0%,44%{transform:none}48%{transform:scale(1.12)}54%,100%{transform:none}}
+@keyframes hgpop{0%,50%{transform:scale(0)}58%{transform:scale(1.35)}64%,92%{transform:scale(1)}100%{transform:scale(0)}}
+/* privacy monitor */
+.mon{border-radius:16px;background:#0a0807;border:2px solid #2d2320;box-shadow:0 0 0 1px #000,0 30px 50px -30px #000;overflow:hidden;font:500 13px/1.9 var(--mono);color:#e3c58c}
+.mon__h{display:flex;justify-content:space-between;padding:12px 18px;border-bottom:1px solid #2d2320;color:#a98558}
+.mon__h b{color:#52e08b;font-weight:700}
+.mon__g{display:block;width:100%;height:84px;border-bottom:1px solid #2d2320;background:linear-gradient(#0000 calc(100% - 1px),#2d2320 0) 0 0/100% 21px}
+.mon__g path{fill:none;stroke:#52e08b;stroke-width:2.5;stroke-linecap:round}
+.mon__g .sw{stroke-dasharray:60 340;animation:sweep 3.2s linear infinite;filter:drop-shadow(0 0 5px #52e08b)}
+.mon__g .base{opacity:.28}
+@keyframes sweep{from{stroke-dashoffset:60}to{stroke-dashoffset:-400}}
+.mon__l{height:182px;overflow:hidden;padding:8px 18px;-webkit-mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent)}
+.mon__l ul{list-style:none;padding:0;animation:roll 14s linear infinite}
+.mon__l li b{color:#ffb52e;font-weight:600;display:inline-block;width:5.4em}
+.mon__l li.ok{color:#52e08b}
+@keyframes roll{to{transform:translateY(-50%)}}
+/* faq open */
+.faq details[open] p{animation:fdown .45s cubic-bezier(.2,.7,.1,1)}
+@keyframes fdown{from{opacity:0;transform:translateY(-8px)}}
+/* motes: dust in the daylight */
+.motes{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.mote{position:absolute;border-radius:50%;background:#fff8d6;opacity:0;box-shadow:0 0 8px 2px rgba(255,248,214,.7);animation:mote var(--t,20s) ease-in-out var(--dl,0s) infinite}
+:root[data-lights="off"] .mote{background:#9fe0b8;box-shadow:0 0 8px 2px rgba(159,224,184,.5)}
+@keyframes mote{0%{opacity:0;transform:translate(0,0)}15%,80%{opacity:var(--o,.7)}50%{transform:translate(var(--mx,40px),var(--my,-60px))}100%{opacity:0;transform:translate(calc(var(--mx,40px)*2),calc(var(--my,-60px)*2))}}
+/* scroll reveals */
+.js .rv{opacity:0}
+.js .rv.in{opacity:1;animation:var(--a,rvU) .85s cubic-bezier(.2,.7,.1,1) var(--d,0ms) backwards}
+.rv-h{--a:rvH}.rv-l{--a:rvL}.rv-r{--a:rvR}.rv-p{--a:rvP}
+@keyframes rvU{from{opacity:0;transform:translateY(34px)}}
+@keyframes rvH{from{opacity:0;transform:translateY(46px);clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 -20% 0)}}
+@keyframes rvL{from{opacity:0;transform:translateX(-60px) rotate(-1.5deg)}}
+@keyframes rvR{from{opacity:0;transform:translateX(60px) rotate(1.5deg)}}
+@keyframes rvP{from{opacity:0;transform:scale(.82) translateY(16px)}}
+/* compare: crossing it out, then the good list arriving */
+.cmp__bad li span{text-decoration-color:transparent}
+.cmp__bad.in li span{animation:sk .5s ease forwards;animation-delay:calc(.6s + var(--i)*.45s)}
+@keyframes sk{to{text-decoration-color:currentColor}}
+.cmp__good.in li{animation:rvU .7s cubic-bezier(.2,.7,.1,1) backwards;animation-delay:calc(.5s + var(--i)*.28s)}
+.cmp li b{transition:opacity .3s}
+/* small hovers */
+.sg{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.sg:hover{transform:rotate(-1.2deg) translateY(-4px)}
+.pn:hover{--r:0deg}
+.facts__g div{transition:background .3s}
+.facts__g div:hover{background:color-mix(in srgb,var(--amber) 22%,transparent)}
+@media(max-width:860px){.inst,.faq2,.priv{grid-template-columns:1fr;gap:36px}.sticky{position:static}.sec{padding:64px 0}}
+@media(prefers-reduced-motion:reduce){.js .rv{opacity:1}.js .rv.in{animation:none}.motes{display:none}.cmp__bad li span{text-decoration-color:currentColor}.scene__app,.scene__cur,.fold,.scene__hg,.mon__g .sw,.mon__l ul{animation:none}.scene__hg{transform:none}}
 </style>
 </head>
 <body>
@@ -704,8 +778,17 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
   <!-- ============ PRIVACY ============ -->
   <section class="night" id="privacy">
     <div class="wrap">
+      <div class="priv">
+      <div>
       <h2>nothing leaves the room.</h2>
       <p class="sub">Screenshots are analysed on your Mac and discarded. Text recognition runs on-device with Apple's Vision framework. The whole app is a handful of Swift files, so you can <a href="https://github.com/DinoCodes-Potter/Waiting-Room/tree/main/Sources/WaitingRoom">read the source</a> yourself. This page makes no network calls either.</p>
+            </div>
+      <div class="mon" aria-hidden="true">
+        <div class="mon__h"><span>Network activity</span><b>0 B/s</b></div>
+        <svg class="mon__g" viewBox="0 0 400 84" preserveAspectRatio="none"><path class="base" d="M0 62H400"/><path class="sw" d="M0 62H400"/></svg>
+        <div class="mon__l"><ul><li><b>capture</b>region 1 to memory</li><li><b>compare</b>frame 2 vs 1, 0 px changed</li><li><b>ocr</b>Vision, on this Mac</li><li><b>discard</b>frame freed</li><li class="ok"><b>network</b>nothing sent</li><li><b>capture</b>region 1 to memory</li><li><b>compare</b>frame 2 vs 1, 0 px changed</li><li><b>ocr</b>Vision, on this Mac</li><li><b>discard</b>frame freed</li><li class="ok"><b>network</b>nothing sent</li></ul></div>
+      </div>
+      </div>
       <div class="stats" id="stats">
         <div class="stat"><div class="stat__d" data-val="0"></div><span>network calls</span></div>
         <div class="stat"><div class="stat__d" data-val="100"></div><span>% on-device</span></div>
@@ -721,15 +804,15 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
       <h2>two ways to wait<br>for a build.</h2>
       <div class="cmp">
         <div class="cmp__bad"><h3>Staring at it</h3><ul>
-          <li><b>0:00</b><span>Start the build. Open email "just for a second".</span></li>
-          <li><b>0:04</b><span>Check the build. Still going.</span></li>
-          <li><b>0:09</b><span>Check the build. Still going.</span></li>
-          <li><b>0:14</b><span>Fall into a video. The build finished at 0:11.</span></li></ul></div>
+          <li style="--i:0"><b>0:00</b><span>Start the build. Open email "just for a second".</span></li>
+          <li style="--i:1"><b>0:04</b><span>Check the build. Still going.</span></li>
+          <li style="--i:2"><b>0:09</b><span>Check the build. Still going.</span></li>
+          <li style="--i:3"><b>0:14</b><span>Fall into a video. The build finished at 0:11.</span></li></ul></div>
         <div class="cmp__good"><h3>Waiting Room</h3><ul>
-          <li><b>0:00</b><span>Start the build. Draw a box around the log.</span></li>
-          <li><b>0:01</b><span>Go and do something else. Properly this time.</span></li>
-          <li><b>0:11</b><span>A banner appears: "Stopped changing. Looks successful."</span></li>
-          <li><b>0:12</b><span>You are back at your desk before the second sip.</span></li></ul></div>
+          <li style="--i:0"><b>0:00</b><span>Start the build. Draw a box around the log.</span></li>
+          <li style="--i:1"><b>0:01</b><span>Go and do something else. Properly this time.</span></li>
+          <li style="--i:2"><b>0:11</b><span>A banner appears: "Stopped changing. Looks successful."</span></li>
+          <li style="--i:3"><b>0:12</b><span>You are back at your desk before the second sip.</span></li></ul></div>
       </div>
     </div>
   </section>
@@ -763,6 +846,7 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
   <!-- ============ INSTALL ============ -->
   <section class="sec" id="install">
     <div class="wrap">
+      <div class="inst"><div>
       <h2>take a number.</h2>
       <p class="sub">Three stops, in this order. Needs a Mac with Apple silicon on macOS 14 (Sonoma) or later.</p>
       <div class="tk">
@@ -777,6 +861,16 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
         </a>
       </div>
       <details class="verify"><summary>Verify the download</summary>SHA-256 of WaitingRoom-0.1.dmg:<code>b64578218910663ed07dd76904f5e0e1253a18900cefda2f6f50419d6e61cc6a</code></details>
+      </div>
+      <div class="sticky"><div class="scene" aria-hidden="true">
+        <div class="scene__bar"><span><b>Finder</b>&nbsp;&nbsp;File&nbsp;&nbsp;Edit&nbsp;&nbsp;View</span><i class="scene__hg"><svg viewBox="0 0 24 24"><path d="M6 3h12M6 21h12M7 3c0 6 5 6 5 9s-5 3-5 9M17 3c0 6-5 6-5 9s5 3 5 9"/></svg></i></div>
+        <div class="scene__body">
+          <figure class="scene__app"><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h12M6 21h12M7 3c0 6 5 6 5 9s-5 3-5 9M17 3c0 6-5 6-5 9s5 3 5 9"/></svg></div>Waiting Room</figure>
+          <figure><div class="fold"></div>Applications</figure>
+          <svg class="scene__cur" viewBox="0 0 24 24"><path d="M5 2l14 10-6 1.4 3.4 6.6-3 1.6-3.4-6.6L5 19z" fill="#fff" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <p class="scene__cap">Drag, drop, look for the hourglass.</p>
+      </div></div></div>
       <div class="pre" id="code"><button type="button" id="copy">Copy</button>or build it yourself:
 git clone https://github.com/DinoCodes-Potter/Waiting-Room.git
 cd Waiting-Room
@@ -803,9 +897,13 @@ swift build -c release
   </section>
 
   <!-- ============ FAQ ============ -->
-  <section class="sec" id="faq" style="padding-top:40px">
+  <section class="sec" id="faq">
     <div class="wrap">
-      <h2>at reception.</h2>
+      <div class="faq2"><div class="faq2__l sticky">
+        <h2>at reception.</h2>
+        <p class="sub">Quick answers. Anything missing, ask.</p>
+        <a class="btn" href="https://github.com/DinoCodes-Potter/Waiting-Room/issues/new/choose" target="_blank" rel="noopener">Ask on GitHub</a>
+      </div>
       <div class="faq">
         <details><summary>Does my screen content leave my Mac?</summary><p>No. Screenshots are analysed locally and discarded, text recognition runs on-device with Apple's Vision framework, and the app makes no network calls.</p></details>
         <details><summary>Why does macOS warn me the first time I open it?</summary><p>Waiting Room isn't notarized yet, so macOS blocks the first launch. Allow it once under System Settings, Privacy &amp; Security, Open Anyway.</p></details>
@@ -819,8 +917,11 @@ swift build -c release
         <details><summary>How do I uninstall it?</summary><p>Quit Waiting Room from the menu bar, then drag it from Applications to the Trash.</p></details>
         <details><summary>Why does it need Screen Recording permission?</summary><p>To compare pixels in the region you select. Choose "Grant Screen Recording access…" in the menu, allow it in System Settings, then quit and reopen the app.</p></details>
       </div>
+      </div>
     </div>
   </section>
+
+  <div class="pa pa--r" aria-hidden="true"><div class="pa__t"><span>THANK YOU FOR WAITING</span><span>NO. 047, PLEASE PROCEED</span><span>YOUR TABS ARE SAFE WITH US</span><span>DOWNLOAD AT WINDOW 1</span><span>PLEASE TAKE A SEAT</span><span>THANK YOU FOR WAITING</span><span>NO. 047, PLEASE PROCEED</span><span>YOUR TABS ARE SAFE WITH US</span><span>DOWNLOAD AT WINDOW 1</span><span>PLEASE TAKE A SEAT</span><span>THANK YOU FOR WAITING</span><span>NO. 047, PLEASE PROCEED</span><span>YOUR TABS ARE SAFE WITH US</span><span>DOWNLOAD AT WINDOW 1</span><span>PLEASE TAKE A SEAT</span><span>THANK YOU FOR WAITING</span><span>NO. 047, PLEASE PROCEED</span><span>YOUR TABS ARE SAFE WITH US</span><span>DOWNLOAD AT WINDOW 1</span><span>PLEASE TAKE A SEAT</span></div></div>
 
   <!-- ============ THE END ============ -->
   <section class="final">
@@ -1086,6 +1187,23 @@ function r(){var n=esc(nm.value.trim()||'Watch 1'),t=st.value,sens={Low:'Only bi
 function seg(id,fn){$$(id+' button').forEach(function(b){b.onclick=function(){$$(id+' button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});fn(b.dataset.v);r()}})}
 seg('#pmode',function(v){m=v});seg('#psens',function(v){sn=v});nm.oninput=r;st.oninput=r;r()})();
 })();
+
+/* ---------- scroll reveals, count-ins, motes ---------- */
+(function(){
+var $=function(q){return document.querySelector(q)},$$=function(q){return Array.prototype.slice.call(document.querySelectorAll(q))};
+var R=[['h2','rv-h'],['.sub','rv-u'],['.tk .ticket','rv-l'],['.pwin,.scene,.mon','rv-r'],['.cmp>div','rv-u'],['.facts__g>div','rv-p'],['.faq details','rv-u'],['.stat','rv-p'],['.verify,.pre,.take__go','rv-u'],['.faq2__l .btn','rv-u']];
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);if(e.target.classList.contains('cmp__bad'))e.target.parentNode.querySelector('.cmp__good').classList.add('in')}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+var seen=new Set();
+R.forEach(function(r){$$(r[0]).forEach(function(el,i){if(el.closest('.hero')||seen.has(el))return;seen.add(el);el.classList.add('rv',r[1]);el.style.setProperty('--d',((i%6)*80)+'ms');io.observe(el)})});
+var g=$('.cmp__good');if(g){g.classList.remove('rv','rv-u');g.style.opacity=1}
+var fio=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;fio.unobserve(e.target);var b=e.target,fin=b.textContent,ch='0123456789MBITsec.',n=0,t=setInterval(function(){n++;if(n>14){b.textContent=fin;clearInterval(t);return}b.textContent=fin.replace(/[A-Za-z0-9]/g,function(c){return n>9&&Math.random()<.5?c:ch[Math.floor(Math.random()*10)]})},55)})},{threshold:.9});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)$$('.facts__g b').forEach(function(b){fio.observe(b)});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var mo=document.createElement('div');mo.className='motes';mo.setAttribute('aria-hidden','true');
+for(var i=0;i<18;i++){var m=document.createElement('i');m.className='mote';var sz=2+Math.random()*3.5;
+m.style.cssText='left:'+(Math.random()*100)+'%;top:'+(20+Math.random()*80)+'%;width:'+sz+'px;height:'+sz+'px;--t:'+(16+Math.random()*16)+'s;--dl:-'+(Math.random()*20)+'s;--mx:'+((Math.random()-.5)*120)+'px;--my:'+(-30-Math.random()*70)+'px;--o:'+(.35+Math.random()*.5);mo.appendChild(m)}
+document.body.insertBefore(mo,document.body.firstChild)}
+})();
+
 </script>
 </body>
 </html>
