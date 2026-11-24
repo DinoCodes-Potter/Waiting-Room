@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.1] - 2026-11
+
+### Fixed
+- A window watch no longer shows a black picture, or reports a false "stopped", when you switch Desktops. It pauses while the window is on another Desktop or minimized, says so on its card, and resumes cleanly when you come back
+- Blank captures of a window are ignored instead of being treated as a change
+
 ## [0.2] - 2026-11
 
 ### Added
