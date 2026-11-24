@@ -5,8 +5,9 @@ All notable changes to this project are documented here. The format follows [Kee
 ## [0.2.1] - 2026-11
 
 ### Fixed
-- A window watch no longer shows a black picture, or reports a false "stopped", when you switch Desktops. It pauses while the window is on another Desktop or minimized, says so on its card, and resumes cleanly when you come back
+- A window watch keeps working when you switch to another Desktop or minimize the window. macOS stops drawing such windows, so ScreenCaptureKit returned a black picture (and a false "stopped"); Waiting Room now reads those windows straight from WindowServer
 - Blank captures of a window are ignored instead of being treated as a change
+- The watch card says "On another Desktop. Still watching." while this is in use
 
 ## [0.2] - 2026-11
 

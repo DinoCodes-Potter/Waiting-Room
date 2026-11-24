@@ -26,7 +26,7 @@ Drag a box around anything slow, such as a build log, a progress bar, a file tra
 
 ## Features
 
-- **Keeps watching when another window covers it.** Waiting Room captures the window under your selection, not the screen, so you can cover it, move it or work in other apps. If you move the window, the watched region moves with it.
+- **Keeps watching when another window covers it.** Waiting Room captures the window under your selection, not the screen, so you can cover it, move it, minimize it, switch to another Desktop or work in other apps. If you move the window, the watched region moves with it.
 - **Watch any region.** Select a rectangle on any connected display, from the menu or with **Control-Option-W** in any app.
 - **Watch several things at once.** Every watch runs independently, with its own name, mode and sensitivity.
 - **Four alert modes.**
