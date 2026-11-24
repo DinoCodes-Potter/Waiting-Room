@@ -103,6 +103,11 @@ final class Watch: ObservableObject, Identifiable {
     @Published var activity: [Double] = Array(repeating: 0, count: Watch.activityLength)
     /// Where the region is on screen right now (AppKit coordinates), nil when hidden.
     @Published var liveRect: CGRect?
+    /// The window is on another Desktop (Space) or minimized, so macOS isn't drawing it
+    /// and there is nothing to capture.
+    @Published var hidden = false
+    /// The window is on screen but captures come back blank.
+    @Published var unreadable = false
 
     static let activityLength = 48
 
@@ -115,6 +120,8 @@ final class Watch: ObservableObject, Identifiable {
     private var changedTicks = 0
     private var lastChange = Date()
     private var lastFire = Date.distantPast
+    private var lastWasContent = false
+    private var blankStreak = 0
     private let everyCooldown: TimeInterval = 3
 
     init(name: String, screenRect: CGRect, screenFrame: CGRect, displayID: CGDirectDisplayID,
@@ -160,6 +167,22 @@ final class Watch: ObservableObject, Identifiable {
         mode = .stops
     }
 
+    /// Forget previous frames after the window comes back, so the gap is never mistaken for a
+    /// change. The "still for N seconds" clock restarts, so a job that finished while you
+    /// were away is reported shortly after you return.
+    func rebaseline() {
+        prev1 = nil
+        prev2 = nil
+        ticks = 0
+        lastWasContent = false
+        blankStreak = 0
+        lastChange = Date()
+        quiet = 0
+        changing = false
+        unreadable = false
+        error = nil
+    }
+
     func reset() {
         state = .armed
         changing = false
@@ -191,6 +214,19 @@ final class Watch: ObservableObject, Identifiable {
 
     func ingest(_ image: CGImage) -> Bool {
         guard let cur = Watch.pixels(image) else { return false }
+
+        // A window macOS isn't drawing comes back as a black picture. Treating that as a
+        // real frame would look like the screen stopped changing, so skip it.
+        let blank = !cur.contains { $0 & 0x00FF_FFFF != 0 }
+        if usesWindow, blank, lastWasContent, blankStreak < 5 {
+            blankStreak += 1
+            if !unreadable { unreadable = true }
+            return false
+        }
+        if !blank { blankStreak = 0 }
+        lastWasContent = !blank
+        if unreadable { unreadable = false }
+
         ticks += 1
         if ticks % 3 == 1 {
             preview = NSImage(cgImage: image, size: NSSize(width: image.width, height: image.height))

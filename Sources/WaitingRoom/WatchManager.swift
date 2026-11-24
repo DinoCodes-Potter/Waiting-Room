@@ -194,6 +194,11 @@ final class WatchManager: ObservableObject {
                 rect = w.screenRect
             }
             if w.liveRect != rect { w.liveRect = rect }
+            let nowHidden = w.usesWindow && rect == nil
+            if w.hidden != nowHidden {
+                w.hidden = nowHidden
+                if !nowHidden { w.rebaseline() } else { w.error = nil; w.changing = false }
+            }
         }
         frames.sync(watches, enabled: showFrames)
     }
@@ -209,7 +214,7 @@ final class WatchManager: ObservableObject {
 
         guard !paused, !userPaused, !busy else { return }
         let now = Date()
-        let due = watches.filter { $0.state != .finished && now >= $0.nextDue }
+        let due = watches.filter { $0.state != .finished && !$0.hidden && now >= $0.nextDue }
         guard !due.isEmpty else { return }
         busy = true
 

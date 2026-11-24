@@ -214,8 +214,10 @@ struct WatchCard: View {
     @ObservedObject var watch: Watch
 
     private var statusText: String {
-        if let e = watch.error { return e }
         if watch.state == .finished { return watch.summary }
+        if watch.hidden { return "On another Desktop or minimized. Paused until it's back." }
+        if watch.unreadable { return "Can't see that window right now. Holding the last frame." }
+        if let e = watch.error { return e }
         switch watch.mode {
         case .text:
             let p = watch.phrase.trimmingCharacters(in: .whitespaces)
@@ -231,6 +233,7 @@ struct WatchCard: View {
     }
 
     private var dotColor: Color {
+        if watch.hidden || watch.unreadable { return .gray }
         if watch.error != nil { return .red }
         switch watch.state {
         case .armed: return (watch.mode == .every && watch.changing) ? .orange : .blue
@@ -265,12 +268,25 @@ struct WatchCard: View {
                 }
             }
 
+            if watch.hidden {
+                Text("Tip: to keep watching across Desktops, right-click \(watch.target?.app ?? "the app") in the Dock, choose Options, then Assign To: All Desktops.")
+                    .font(.caption2).foregroundStyle(.secondary)
+                    .transition(.opacity)
+            }
+
             if let img = watch.preview {
                 Image(nsImage: img)
                     .resizable().scaledToFit()
                     .frame(maxHeight: 70)
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .frame(maxWidth: .infinity)
+                    .opacity(watch.hidden || watch.unreadable ? 0.35 : 1)
+                    .overlay {
+                        if watch.hidden || watch.unreadable {
+                            Image(systemName: "rectangle.on.rectangle.slash")
+                                .font(.title2).foregroundStyle(.secondary)
+                        }
+                    }
             }
 
             ActivityLine(values: watch.activity, tint: watch.state == .finished ? .green : .orange)
@@ -328,5 +344,6 @@ struct WatchCard: View {
         .animation(.spring(response: 0.4, dampingFraction: 0.85), value: watch.state)
         .animation(.spring(response: 0.4, dampingFraction: 0.85), value: watch.mode)
         .animation(.easeInOut(duration: 0.2), value: watch.followWindow)
+        .animation(.easeInOut(duration: 0.2), value: watch.hidden)
     }
 }
