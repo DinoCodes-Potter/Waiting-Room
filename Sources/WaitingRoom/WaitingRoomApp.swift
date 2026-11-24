@@ -12,7 +12,7 @@ struct WaitingRoomApp: App {
         MenuBarExtra {
             MenuView().environmentObject(manager)
         } label: {
-            Image(systemName: manager.activeCount > 0 ? "hourglass" : "hourglass.bottomhalf.filled")
+            Image(systemName: manager.menuSymbol)
         }
         .menuBarExtraStyle(.window)
     }

@@ -45,6 +45,7 @@ final class SelectionView: NSView {
     override func draw(_ dirtyRect: NSRect) {
         NSColor.black.withAlphaComponent(0.35).setFill()
         bounds.fill()
+
         if let r = selection {
             NSColor.clear.setFill()
             r.fill(using: .copy)
@@ -52,6 +53,31 @@ final class SelectionView: NSView {
             let path = NSBezierPath(rect: r)
             path.lineWidth = 2
             path.stroke()
+
+            // Live size readout next to the box.
+            let label = "\(Int(r.width)) × \(Int(r.height))" as NSString
+            let attrs: [NSAttributedString.Key: Any] = [
+                .font: NSFont.monospacedDigitSystemFont(ofSize: 12, weight: .semibold),
+                .foregroundColor: NSColor.white,
+            ]
+            let size = label.size(withAttributes: attrs)
+            let pill = NSRect(x: r.minX, y: max(4, r.minY - size.height - 10),
+                              width: size.width + 14, height: size.height + 6)
+            NSColor.systemBlue.setFill()
+            NSBezierPath(roundedRect: pill, xRadius: 6, yRadius: 6).fill()
+            label.draw(at: NSPoint(x: pill.minX + 7, y: pill.minY + 3), withAttributes: attrs)
+        } else {
+            let hint = "Drag around what you want to watch. Windows covering it won't matter.   Esc to cancel" as NSString
+            let attrs: [NSAttributedString.Key: Any] = [
+                .font: NSFont.systemFont(ofSize: 15, weight: .medium),
+                .foregroundColor: NSColor.white,
+            ]
+            let size = hint.size(withAttributes: attrs)
+            let pill = NSRect(x: bounds.midX - size.width / 2 - 16, y: bounds.maxY - 110,
+                              width: size.width + 32, height: size.height + 18)
+            NSColor.black.withAlphaComponent(0.7).setFill()
+            NSBezierPath(roundedRect: pill, xRadius: pill.height / 2, yRadius: pill.height / 2).fill()
+            hint.draw(at: NSPoint(x: pill.minX + 16, y: pill.minY + 9), withAttributes: attrs)
         }
     }
 }

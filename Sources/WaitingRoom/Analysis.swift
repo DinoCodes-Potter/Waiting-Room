@@ -14,7 +14,7 @@ enum Analysis {
             .filter { $0.count > 2 }
     }
 
-    static func summarize(_ lines: [String], mode: TriggerMode) -> String {
+    static func summarize(_ lines: [String], mode: TriggerMode, phrase: String = "") -> String {
         let text = lines.joined(separator: " ").lowercased()
         let failWords = ["error", "failed", "failure", "exception", "fatal", "traceback", "could not", "cannot"]
         let okWords = ["success", "succeeded", "completed", "complete", "done", "passed", "finished", "all tests"]
@@ -34,6 +34,7 @@ enum Analysis {
         case .stops: head = "Stopped changing."
         case .starts: head = "Something started changing."
         case .every: head = "The screen changed."
+        case .text: head = "Found “\(phrase)”."
         }
         return [head, verdict, tail].filter { !$0.isEmpty }.joined(separator: " ")
     }
