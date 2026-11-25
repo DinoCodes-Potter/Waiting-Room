@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   dmg:
@@ -29,3 +30,7 @@ jobs:
           gh release create "v${{ inputs.version }}" "dist/WaitingRoom-${{ inputs.version }}.dmg" \
             --title "Waiting Room ${{ inputs.version }}" \
             --notes-file <(awk '/^## \[/{n++} n==1' CHANGELOG.md | tail -n +2)
+      - name: Deploy the website with the new DMG
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main
