@@ -642,7 +642,7 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
 
 
   <!-- ============ PA TICKER + FACTS ============ -->
-  <div class="pa" aria-hidden="true"><div class="pa__t"><span>NOW SERVING: YOUR BUILD</span><span>PLEASE KEEP THE REGION VISIBLE</span><span>NO. 040 TO WINDOW 3</span><span>SCREENSHOTS NEVER LEAVE THIS MAC</span><span>THE EXPORT HAS STOPPED CHANGING</span><span>PLEASE WAIT TO BE CALLED</span><span>GO MAKE A COFFEE</span><span>UPLOAD COMPLETE, WINDOW 1</span><span>THE AGENT IS DONE TYPING</span><span>NOW SERVING: YOUR BUILD</span><span>PLEASE KEEP THE REGION VISIBLE</span><span>NO. 040 TO WINDOW 3</span><span>SCREENSHOTS NEVER LEAVE THIS MAC</span><span>THE EXPORT HAS STOPPED CHANGING</span><span>PLEASE WAIT TO BE CALLED</span><span>GO MAKE A COFFEE</span><span>UPLOAD COMPLETE, WINDOW 1</span><span>THE AGENT IS DONE TYPING</span></div></div>
+  <div class="pa" aria-hidden="true"><div class="pa__t"><span>NOW SERVING: YOUR BUILD</span><span>COVER IT, MINIMIZE IT, CHANGE DESKTOP: STILL WATCHING</span><span>NO. 040 TO WINDOW 3</span><span>SCREENSHOTS NEVER LEAVE THIS MAC</span><span>THE EXPORT HAS STOPPED CHANGING</span><span>PLEASE WAIT TO BE CALLED</span><span>GO MAKE A COFFEE</span><span>UPLOAD COMPLETE, WINDOW 1</span><span>THE AGENT IS DONE TYPING</span><span>NOW SERVING: YOUR BUILD</span><span>PLEASE KEEP THE REGION VISIBLE</span><span>NO. 040 TO WINDOW 3</span><span>SCREENSHOTS NEVER LEAVE THIS MAC</span><span>THE EXPORT HAS STOPPED CHANGING</span><span>PLEASE WAIT TO BE CALLED</span><span>GO MAKE A COFFEE</span><span>UPLOAD COMPLETE, WINDOW 1</span><span>THE AGENT IS DONE TYPING</span></div></div>
   <section class="facts" aria-label="At a glance"><div class="wrap"><div class="facts__g">
     <div><b>1.1 MB</b><span>The whole app, in a DMG</span></div>
     <div><b>1 sec</b><span>How often a region is checked</span></div>
@@ -676,7 +676,7 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
           <hr>
           <div class="rl"><b>1</b><div><strong>SELECT A REGION</strong><span>Choose "Watch a region…" from the menu bar. Your screens dim. Drag a box around whatever is slow.</span></div></div>
           <div class="rl"><b>2</b><div><strong>CHOOSE THE ALERT</strong><span>Stops, starts or any change, and how still it has to be.</span></div></div>
-          <div class="rl"><b>3</b><div><strong>GO MAKE A COFFEE</strong><span>It checks every second or two. Keep the region visible.</span></div></div>
+          <div class="rl"><b>3</b><div><strong>GO MAKE A COFFEE</strong><span>It checks every second or two. Cover the window or switch Desktops. It keeps watching.</span></div></div>
           <div class="rl"><b>4</b><div><strong>GET THE VERDICT</strong><span>It reads the text in the region and says success or error, with the last lines it saw.</span></div></div>
           <hr>
           <div class="tot"><span>TIME SPENT STARING</span><i></i><span>0:00</span></div>
@@ -772,7 +772,7 @@ footer{padding:0 0 48px;font-size:14px;color:var(--mut)}
         <article class="sg" style="--d:0.72s">
           <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="27" fill="#1f5fbf"/><rect x="12" y="14" width="24" height="18" rx="2" fill="none" stroke="#fff" stroke-width="3"/><rect x="22" y="24" width="22" height="16" rx="2" fill="#1f5fbf" stroke="#fff" stroke-width="3"/></svg>
           <h3>Works behind other windows</h3>
-          <p>Waiting Room watches the window itself, not the screen. Cover it, move it or switch Spaces and it carries on.</p>
+          <p>Waiting Room watches the window itself, not the screen. Cover it, move it, minimize it or switch Desktops and it carries on.</p>
         </article>
         <article class="sg" style="--d:0.84s">
           <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="27" fill="#1f8a4c"/><path d="M16 20h24M16 28h16M16 36h20" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg>
@@ -941,9 +941,9 @@ swift build -c release
       <div class="notices" id="nboard">
         <article class="pn" style="--r:-1.2deg;--c:#fdf0a8"><h3>Apple silicon only</h3>The prebuilt app runs on Macs with Apple silicon, on macOS 14 or later.</article>
         <article class="pn" style="--r:.8deg"><h3>Not notarized yet</h3>macOS blocks the first launch. Allow it once under System Settings, Privacy &amp; Security, Open Anyway.</article>
-        <article class="pn" style="--r:-.6deg;--c:#d8e8fb"><h3>Keep the region visible</h3>Waiting Room compares what is on screen. If another window covers the region, it sees that window instead.</article>
+        <article class="pn" style="--r:-.6deg;--c:#d8e8fb"><h3>Covered? Fine.</h3>Other windows in front, another Desktop or a minimized window will not blank it. A window you close can no longer be read.</article>
         <article class="pn" style="--r:1.3deg;--c:#fbdcd6"><h3>Screen Recording required</h3>macOS asks once. Grant it, then quit and reopen the app.</article>
-        <article class="pn" style="--r:-1deg"><h3>Version 0.2</h3>Now works behind other windows. Found a bug? <a href="https://github.com/DinoCodes-Potter/Waiting-Room/issues/new?template=bug_report.yml" target="_blank" rel="noopener">Tell us</a>.</article>
+        <article class="pn" style="--r:-1deg"><h3>Version 0.2.1</h3>Now watches windows on other Desktops too. Found a bug? <a href="https://github.com/DinoCodes-Potter/Waiting-Room/issues/new?template=bug_report.yml" target="_blank" rel="noopener">Tell us</a>.</article>
         <article class="pn" style="--r:.6deg;--c:#fdf0a8"><h3>Free and open source</h3>MIT licensed. Read it, fork it, build it. <a href="https://github.com/DinoCodes-Potter/Waiting-Room" target="_blank" rel="noopener">Source on GitHub</a>.</article>
       </div>
     </div>
@@ -961,6 +961,7 @@ swift build -c release
         <details><summary>Does my screen content leave my Mac?</summary><p>No. Screenshots are analysed locally and discarded, text recognition runs on-device with Apple's Vision framework, and the app makes no network calls.</p></details>
         <details><summary>Why does macOS warn me the first time I open it?</summary><p>Waiting Room isn't notarized yet, so macOS blocks the first launch. Allow it once under System Settings, Privacy &amp; Security, Open Anyway.</p></details>
         <details><summary>Which Macs are supported?</summary><p>Macs with Apple silicon running macOS 14 (Sonoma) or later, which the ScreenCaptureKit screenshot API requires.</p></details>
+        <details><summary>Does it work if another window covers it, or I switch Desktops?</summary><p>Yes. Waiting Room watches the window under your selection, not the screen, so windows in front of it don't matter. If you switch to another Desktop, or minimize the window, it keeps reading it straight from macOS. If you move the window, the watched region moves with it. A window you close can't be read, and some apps stop redrawing while they are off screen, in which case the picture can go stale.</p></details>
         <details><summary>Can I watch more than one thing?</summary><p>Yes. Every watch runs independently, with its own name, alert mode and sensitivity.</p></details>
         <details><summary>How often does it check the screen?</summary><p>Each region is captured every second, or every two seconds while a Stops watch is waiting for activity to begin. It slows down in Low Power Mode.</p></details>
         <details><summary>Is it free?</summary><p>Yes. Waiting Room is free and open source under the MIT licence.</p></details>
