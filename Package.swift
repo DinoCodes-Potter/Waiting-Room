@@ -11,6 +11,11 @@ let package = Package(
         .executableTarget(
             name: "WaitingRoom",
             path: "Sources/WaitingRoom"
-        )
+        ),
+        .testTarget(
+            name: "WaitingRoomTests",
+            dependencies: ["WaitingRoom"],
+            path: "Tests/WaitingRoomTests"
+        ),
     ]
 )

@@ -115,6 +115,10 @@ final class Watch: ObservableObject, Identifiable {
 
     var nextDue = Date.distantPast
     var windowSize: CGSize
+    /// When the watch was created or last reset.
+    private(set) var armedAt = Date()
+    /// When activity first showed up in the region.
+    private(set) var activeSince: Date?
     var finishedAt: Date?
 
     private var prev1: [UInt32]?
@@ -165,6 +169,24 @@ final class Watch: ObservableObject, Identifiable {
         return ProcessInfo.processInfo.isLowPowerModeEnabled ? base * 2 : base
     }
 
+    /// How long the thing you were waiting for took: for "Stops", from the first activity to
+    /// the last change; otherwise from when the watch started.
+    var duration: TimeInterval? {
+        switch mode {
+        case .stops: return activeSince.map { max(0, lastChange.timeIntervalSince($0)) }
+        case .starts, .text: return Date().timeIntervalSince(armedAt)
+        case .every: return nil
+        }
+    }
+
+    /// "45s", "12m 04s", "1h 03m".
+    static func format(_ t: TimeInterval) -> String {
+        let s = Int(t.rounded())
+        if s < 60 { return "\(s)s" }
+        if s < 3600 { return "\(s / 60)m \(String(format: "%02d", s % 60))s" }
+        return "\(s / 3600)h \(String(format: "%02d", (s % 3600) / 60))m"
+    }
+
     func apply(_ preset: Preset) {
         settle = preset.settle
         sensitivity = preset.sensitivity
@@ -193,6 +215,8 @@ final class Watch: ObservableObject, Identifiable {
         summary = ""
         quiet = 0
         finishedAt = nil
+        armedAt = Date()
+        activeSince = nil
         prev1 = nil
         prev2 = nil
         ticks = 0
@@ -287,7 +311,7 @@ final class Watch: ObservableObject, Identifiable {
             if isChanging {
                 lastChange = now
                 changedTicks += 1
-                if state == .armed { state = .active }
+                if state == .armed { state = .active; activeSince = now }
             } else if state == .active, changedTicks >= 3,
                       now.timeIntervalSince(lastChange) >= settle {
                 state = .finished
@@ -304,7 +328,7 @@ final class Watch: ObservableObject, Identifiable {
                 return true
             }
         case .text:
-            if state == .armed { state = .active }
+            if state == .armed { state = .active; activeSince = now }
         }
         return false
     }

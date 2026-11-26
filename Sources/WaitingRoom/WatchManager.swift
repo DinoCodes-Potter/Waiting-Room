@@ -336,13 +336,14 @@ final class WatchManager: ObservableObject {
         log.insert(LogEntry(date: Date(), name: w.name, summary: summary), at: 0)
         if log.count > 8 { log.removeLast() }
 
+        let took = w.duration.map { " after \(Watch.format($0))" } ?? ""
         let title: String
         let kind: ToastKind
         switch w.mode {
-        case .stops: title = "\(w.name): done"; kind = .success
-        case .starts: title = "\(w.name): something changed"; kind = .change
+        case .stops: title = "\(w.name): done\(took)"; kind = .success
+        case .starts: title = "\(w.name): something changed\(took)"; kind = .change
         case .every: title = "\(w.name): screen changed"; kind = .change
-        case .text: title = "\(w.name): found it"; kind = .success
+        case .text: title = "\(w.name): found it\(took)"; kind = .success
         }
         let finalKind: ToastKind = summary.contains("⚠️") ? .error : kind
 

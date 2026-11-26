@@ -226,7 +226,8 @@ struct WatchCard: View {
             return p.isEmpty ? "Type the text to wait for." : "Reading the region for “\(p)”…"
         case .stops:
             if watch.state == .armed { return "Waiting for activity to begin…" }
-            return watch.changing ? "Changing now" : "Quiet. Alerting after \(Int(watch.settle))s of stillness"
+            let running = watch.duration.map { " · \(Watch.format($0)) in" } ?? ""
+            return watch.changing ? "Changing now\(running)" : "Quiet. Alerting after \(Int(watch.settle))s of stillness"
         case .starts:
             return "Waiting for something to change…"
         case .every:

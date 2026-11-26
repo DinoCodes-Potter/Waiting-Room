@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not found | Waiting Room</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+:root{color-scheme:light dark;--wall:#d9e6d6;--ink:#12201a;--paper:#fbf5e3;--led:#ff4a36}
+@media(prefers-color-scheme:dark){:root{--wall:#0f1914;--ink:#eaf3e6}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;display:grid;place-items:center;padding:24px;background:var(--wall);color:var(--ink);font:18px/1.5 "Helvetica Neue",Helvetica,Arial,sans-serif}
+main{max-width:520px;text-align:center}
+.board{display:inline-block;padding:18px 30px 10px;border-radius:20px;background:#1a0f0d;border:5px solid #3a2823;box-shadow:0 24px 36px -22px rgba(0,0,0,.6)}
+.board small{display:block;color:#ffb52e;font:700 13px ui-monospace,Menlo,monospace;letter-spacing:.2em}
+.board b{display:block;color:var(--led);font:700 84px/1.1 ui-monospace,Menlo,monospace;letter-spacing:-.04em;text-shadow:0 0 22px rgba(255,74,54,.6);animation:blink 1.4s steps(1) infinite}
+@keyframes blink{50%{opacity:.55}}
+h1{margin:28px 0 8px;font-size:40px;letter-spacing:-.04em;line-height:1}
+p{margin:0 0 26px;opacity:.8}
+a{display:inline-block;padding:14px 26px;border-radius:14px;background:var(--paper);color:#12201a;font-weight:700;text-decoration:none;box-shadow:0 14px 22px -14px rgba(0,0,0,.5)}
+a:focus-visible{outline:3px solid #1f5fbf;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.board b{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <div class="board" aria-hidden="true"><small>NOW SERVING</small><b>404</b></div>
+  <h1>That window doesn't exist.</h1>
+  <p>The page you wanted isn't here. Take a seat and head back to the lobby.</p>
+  <a href="./">Back to the lobby</a>
+</main>
+</body>
+</html>
