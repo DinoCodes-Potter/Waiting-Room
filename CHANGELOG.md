@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.2] - 2026-11
+
+### Added
+- Alerts say how long the job took, for example "done after 12m 04s", and the watch card shows the running time
+- Unit tests for the detection logic, run on every push
+
+### Changed
+- The website deploy is split into build and deploy jobs, which fixes its occasional "artifact not found" failure
+- Link previews now show an image card, and there is a 404 page
+
 ## [0.2.1] - 2026-11
 
 ### Fixed
