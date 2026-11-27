@@ -15,7 +15,7 @@ jobs:
   dmg:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build the app and DMG
         run: scripts/make-dmg.sh "${{ inputs.version }}"
       - name: Check the bundle
