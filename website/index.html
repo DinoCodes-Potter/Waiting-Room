@@ -16,7 +16,9 @@
 <meta property="og:image:alt" content="Waiting Room: go make a coffee, we'll watch the screen. A now-serving board and a Download for macOS ticket.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dinocodes-potter.github.io/Waiting-Room/og.png">
+<link rel="canonical" href="https://dinocodes-potter.github.io/Waiting-Room/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Waiting Room","applicationCategory":"UtilitiesApplication","operatingSystem":"macOS 14 or later","description":"A macOS menu bar app that watches a region of your screen, even behind other windows or on another Desktop, and tells you when it stops changing.","url":"https://dinocodes-potter.github.io/Waiting-Room/","downloadUrl":"https://github.com/DinoCodes-Potter/Waiting-Room/releases/latest","license":"https://opensource.org/licenses/MIT","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Abhinav Sharma"}}</script>
 <script>var d=document.documentElement,l;d.classList.add('js');try{l=localStorage.getItem('wr-lights')}catch(e){}if(!l)l=matchMedia('(prefers-color-scheme: dark)').matches?'off':'on';d.dataset.lights=l</script>
 <style>
 /* ------------------------------------------------------------------
@@ -992,7 +994,8 @@ swift build -c release
           <span class="ticket__stub"><small>No.</small><b data-num>039</b></span>
           <span class="ticket__main"><span><strong>Download Waiting Room</strong><small>Free · open source</small></span><span class="ticket__go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></span></span>
         </a>
-        <a class="btn" href="https://github.com/DinoCodes-Potter/Waiting-Room" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="btn" href="https://github.com/DinoCodes-Potter/Waiting-Room" target="_blank" rel="noopener">Star it on GitHub</a>
+        <button class="btn" type="button" id="share">Tell a friend</button>
       </div>
       <svg class="bench" viewBox="0 0 660 130" role="img" aria-label="A row of waiting room chairs with a cup of coffee on one seat">
         <path d="M0 122h660" stroke="#12201a" stroke-width="3" stroke-linecap="round" opacity=".55"/>
@@ -1274,6 +1277,11 @@ fetch('download/meta.json',{cache:'no-cache'}).then(function(r){return r.ok?r.js
 document.querySelectorAll('[data-ver]').forEach(function(e){e.textContent=m.version});
 document.querySelectorAll('[data-size]').forEach(function(e){e.textContent=(m.bytes/1048576).toFixed(1)+' MB'});
 var h=document.getElementById('sha');if(h)h.textContent=m.sha256}).catch(function(){})})();
+
+(function(){var b=document.getElementById('share');if(!b)return;var url='https://dinocodes-potter.github.io/Waiting-Room/',txt='Waiting Room: a Mac menu bar app that watches part of your screen and tells you when it stops changing.';
+function done(m){var o=b.textContent;b.textContent=m;setTimeout(function(){b.textContent=o},2200)}
+b.addEventListener('click',function(){if(navigator.share){navigator.share({title:'Waiting Room',text:txt,url:url}).catch(function(){})}
+else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){done('Link copied')},function(){done('Copy: '+url)})}else done('Copy: '+url)})})();
 </script>
 </body>
 </html>

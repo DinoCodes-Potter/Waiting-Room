@@ -18,6 +18,10 @@
   <a href="https://github.com/DinoCodes-Potter/Waiting-Room/issues/new?template=bug_report.yml">Report a bug</a>
 </p>
 
+<p>
+  <a href="https://dinocodes-potter.github.io/Waiting-Room/"><img src="docs/demo.gif" alt="Waiting Room watching a board: drag a box around it, it counts, stops, and a notification appears" width="720"></a>
+</p>
+
 </div>
 
 ---
@@ -49,6 +53,13 @@ Drag a box around anything slow, such as a build log, a progress bar, a file tra
 1. [Download the latest DMG](https://github.com/DinoCodes-Potter/Waiting-Room/releases/latest).
 2. Open it and drag **Waiting Room** into **Applications**.
 3. Open Waiting Room. It lives in your menu bar (look for the hourglass).
+
+### Or with Homebrew
+
+```sh
+brew tap DinoCodes-Potter/waiting-room https://github.com/DinoCodes-Potter/Waiting-Room
+brew install --cask waiting-room
+```
 
 ### macOS will warn you the first time
 
@@ -120,6 +131,14 @@ scripts/make-dmg.sh 0.2
 ```
 
 This builds an ad-hoc signed `Waiting Room.app` and a drag-to-install DMG in `dist/`. The **Release** workflow does the same on a macOS runner and publishes it as a GitHub Release, which the website then serves.
+
+## Help it find its people
+
+Waiting Room is free and has no ads or tracking, so word of mouth is how it spreads. If it saved you a few minutes of staring at a progress bar:
+
+- **Star the repo** with the button at the top right of this page. It's the cheapest way to help.
+- **Tell one person** who waits on builds, downloads or AI agents. The [website](https://dinocodes-potter.github.io/Waiting-Room/) has a demo you can try without installing anything.
+- **Share what you use it for.** [Open an issue](https://github.com/DinoCodes-Potter/Waiting-Room/issues/new/choose) with a use case or an idea, and it may end up in the next release.
 
 ## Project layout
 
